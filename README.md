@@ -7,7 +7,7 @@
 
 Afin d'éviter toute déconvenue il est souhaitable de commencez par là.
 
-### Requis machine
+### Requis machine de base
 
 * Microprocesseur suffisamment véloce (minimum Raspberry Pi4)
 * Mémoire vive 8 Go (minimum 4Go)
@@ -16,6 +16,7 @@ Afin d'éviter toute déconvenue il est souhaitable de commencez par là.
 * Système d'exploitation : la distribution Debian par exemple convient très bien.
 * Installation et administration par accès ssh (interface en ligne de commande)
 
+dans les détails
 
 * Un nœud Bitcoin doit tourner 24h/24  7j sur 7 et à priori pendant des années
 * En neuf il y a les mini PC avec des CPU frugaux comme le N100
@@ -35,7 +36,7 @@ Raspberry Pi 5
 * 8 Go de Ram / LPDDR4X 4267 MHz
 * Connecté au réseau par RJ45
 * OS + données blockchain sur : HAT+ Geekworm X1001 avec NVMe.M2 de 2 To (¹)
-* Debian GNU/Linux 12 Bookworm arm64 version "console-only"
+* Debian GNU/Linux arm64 version "console-only"
 * Le système démarre directement sur le NVMe.M2 pour une fiabilité accrue
 * Consommation 4.5 watts / heure (en situation sur une moyenne de 20 jours)
 * Alimentation secourue :
@@ -58,7 +59,7 @@ Dell Optiplex 5050 SFF
 * Connecté au réseau par RJ45
 * Operating System sur SSD sata 240 Go
 * Données blockchain sur NVMe.M2 de 2 To (le connecteur M2 2280 est sur la carte mère)
-* Debian 12 Bookworm PC 64 bits installée  "console-only"
+* Debian PC 64 bits installée  "console-only"
 * Consommation 11.2 watts / heure (en situation sur une moyenne de 15 jours)
 * Alimentation secourue : onduleur. Si l'onduleur est capable de dialoguer avec le PC, vous avez  upsmon pour arrêter le système proprement en cas de coupure prolongée. Et puis oui les onduleurs c'est pénible et coûteux dans le temps. Soit on change les batteries au plomb tous les 4 à 5 ans, soit on s'aperçoit qu'il faut changer la batterie lorsque y a une coupure puisque l'onduleur n'a pas fait son boulot et que le système s'est arrêté en vrac ! Suivant le camp ou vous situez ne mettez pas d'onduleur … ou bien regardez du côté des stations d'énergie à batterie LiFePO4 dont la durée de vie est en principe > 10 ans.
 
@@ -1567,7 +1568,7 @@ git pull
 git tag
 ```
 
-**Ici je choisi la "v29.0"**
+**Ici pour l'exemple, je choisi la "v29.0"**
 
 Facultatif : vérifier que la "release" que vous avez sélectionnée est signée :
 
@@ -1870,6 +1871,7 @@ Un "full node" possède l'historique de la totalité des UTXO dans son stockage 
 [Le dictionnaire de Bitcoin par Loic … LA mine d'informations](https://github.com/LoicPandul/Dictionnaire-de-Bitcoin)
 
 
+\
 ## Conclusion
 
 ### of Satoshi Nakamoto's paper
