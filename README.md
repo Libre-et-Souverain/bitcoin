@@ -5,7 +5,7 @@
 
 ## Matériel dédié
 
-Afin d'éviter toute déconvenue il est souhaitable de commencez par cela.
+Afin d'éviter toute déconvenue il est souhaitable de commencez par là.
 
 ### Requis machine
 
@@ -16,15 +16,16 @@ Afin d'éviter toute déconvenue il est souhaitable de commencez par cela.
 * Système d'exploitation : la distribution Debian par exemple convient très bien.
 * Installation et administration par accès ssh (interface en ligne de commande)
 
-  \
-* Un nœud bitcoin doit tourner 24h/24  7j sur 7 et à priori pendant des années
+
+* Un nœud Bitcoin doit tourner 24h/24  7j sur 7 et à priori pendant des années
 * En neuf il y a les mini PC avec des CPU frugaux comme le N100
 * D'occasion avec les PC de taille réduite comme la série des DELL Optiplex SFF
-* Deux périphériques stockage de masse seront un véritable plus, il est opportun de séparer le système d'exploitation de la copie de la blockchain bitcoin.
-* Pour les données blockchain éviter le disque dur, utiliser un SSD ou mieux un NVMe.M2
-* Éviter toute connexion au réseau par ondes hertziennes, les fils c'est mieux !
+* Deux périphériques stockage de masse seront un véritable plus, il est opportun de séparer le système d'exploitation de la copie de la blockchain Bitcoin.
+* Pour les données blockchain utiliser un SSD ou mieux un NVMe.M2
+* Éviter toute connexion au réseau par ondes hertziennes, les fils c'est fiable !
 * Les choix doivent être dictés par l'usage, la simplicité et la sobriété sont bien souvent une garantie de silence, de fiabilité et de longévité.
 * A prévoir le cas échéant, une alimentation secteur secourue en cas de coupure.
+
 
 ### Machine minimale
 
@@ -47,6 +48,7 @@ Raspberry Pi 5
 * jusqu'à présent il est impossible de booter sur NVME si plus d'un sur la carte d'extension, à vérifier dans le temps bien sûr. 
 * booter sur usb est nul vu le concept de cette machine, autant passer sur une machine plus classique et parfois moins chère si acquise d'occasion.
 
+
 ### Machine classique
 
 Dell Optiplex 5050 SFF
@@ -62,7 +64,7 @@ Dell Optiplex 5050 SFF
 
 ### Installation du système d'exploitation
 
-Vous trouverez sur le net de bons tutoriels pour installer le système d'exploitation. L'Open Source n'est pas une idéologie ou une méthode, c'est un rempart pour l'individu dans le cyberespace face à la centralisation et au contrôle. Le système d'exploitation est une des premières briques, donc tout comme le code source de bitcoin il est plus que souhaitable d'utiliser un OS Open Source, Linux est le choix le plus pratique et le plus répandu. Ici également visez la simplicité, pas d'interface graphique, pas de fioritures inutiles, juste l'essentiel. La machine sera entièrement dédiée à la fonctionnalité de nœud. Par choix à l'installation j'ai créé un seul utilisateur que j'ai appelé  'btc-node'. Pour finir, juste 2 "tips" sur PC si vous avez choisi Debian la mère des distributions Linux  :
+Vous trouverez sur le net de bons tutoriels pour installer le système d'exploitation. L'Open Source n'est pas une idéologie ou une méthode, c'est un rempart pour l'individu dans le cyberespace face à la centralisation et au contrôle. Le système d'exploitation est une des premières briques, donc tout comme le code source de Bitcoin il est plus que souhaitable d'utiliser un OS Open Source, Linux est le choix le plus pratique et le plus répandu. Ici également visez la simplicité, pas d'interface graphique, pas de fioritures inutiles, juste l'essentiel. La machine sera entièrement dédiée à la fonctionnalité de nœud. Par choix à l'installation j'ai créé un seul utilisateur que j'ai appelé  'btc-node'. Pour finir, juste 2 "tips" sur PC si vous avez choisi Debian la mère des distributions Linux  :
 
 * si vous préférez utiliser sudo, à "root password" laissez le champ vide, cela installe sudo et l'utilisateur que vous allez renseigner ensuite se verra attribuer les droits.
 * à sélection des logiciels, cochez uniquement 'serveur SSH' et 'utilitaires usuels du système'.
@@ -105,7 +107,7 @@ La première ligne est une indication sur le débit obtenu en lecture à partir 
 
 La deuxième ligne est une indication du débit que le périphérique supporte en lecture de données séquentielles sans surcharge du système de fichier.
 
-Dans le cas d'usage d'un nœud bitcoin certains processus vont demander la lecture d'une très grande quantité de données, **pour le choix du stockage de masse considérer uniquement la 2ème ligne.** 
+Dans le cas d'usage d'un nœud Bitcoin certains processus vont demander la lecture d'une très grande quantité de données, **pour le choix du stockage de masse considérer uniquement la 2ème ligne.** 
 
 ### Performance mémoire vive
 
@@ -120,7 +122,7 @@ sysbench memory run
 
 Le débit indiqué ici est à rapprocher de la première ligne de la performance du stockage de masse, les chiffres doivent être approximativement similaires. 
 
-## Logiciel bitcoin core
+## Logiciel Bitcoin core
 
 ### **Mettre à jour le système d'exploitation**
 
@@ -129,7 +131,7 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-### **Télécharger avec git le code source de bitcoin**
+### **Télécharger avec git le code source de Bitcoin**
 
 de l'endroit où il est officiellement maintenu
 
@@ -142,7 +144,7 @@ git clone https://github.com/bitcoin/bitcoin.git
 
 ### **Installer les outils et les librairies**
 
-Installer les dépendances nécessaires à la construction de [bitcoin core](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md)
+Installer les dépendances nécessaires à la construction de [Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md)
 
 ```bash
 sudo apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libevent-dev
@@ -161,18 +163,18 @@ Si besoin de dé-installer une librairie, c'est `sudo apt-get remove nom_de_la_l
 
 Faire le ménage après des suppressions de paquets `sudo apt-get autoremove`
 
-La dépendance à la base de données Berkeley ne se pose plus, depuis la version 0.21 bitcoin utilise la base de données SQLite. 
+La dépendance à la base de données Berkeley ne se pose plus, depuis la version 0.21 Bitcoin utilise la base de données SQLite. 
 
-### Compiler bitcoin core
+### Compiler Bitcoin core
 
-D'après ce que l'on sait, durant les années 2007 à 2008 une (ou des) personne(s) a pondu pas mal de lignes de code C++, puis les a lâchées dans le cyber-espace en 2009, un outil fonctionnel et potentiellement révolutionnaire est né. [Au fil du temps le code est ré-écrit](https://bitcoin.fr/au-coeur-du-code/), fiabilisé et amélioré par une équipe connue depuis 2010 \~ 2011 sous le nom de "core developers". Cela peut paraître perturbant mais tout code informatique doit être amélioré, fiabilisé et sécurisé. L'idée de départ parait parfaite mais sa transcription exacte en code informatique est très délicate, le résultat est donc surement qualifiable d'imparfait. Qui plus est : le 3 janvier 2009 le jour du bloc genesis, le comité était réduit à une poignée d'individus voire moins, face à des milliers de lignes de code Open Source mettant en oeuvre un concept jusque-là jamais atteint, une équipe sera ensuite bien plus forte qu'un ou quelques individus. Plus le temps passe et plus nous pouvons dire que cela se rapproche de la perfection ***à condition*** que l'équipe en charge du code conserve l'idéologie et la philosophie initiale. A souligner également, l'environnement autour de bitcoin n'est pas figé, il peut changer ou évoluer. Ici également il faudra que les "core developers" effectuent ce qu'il faut. En tant qu'individu et gardien du registre distribué vous ferez respecter le consensus, face au code vous avez votre mot à dire, vous pouvez le choisir, avoir le choix est important et primordial, c'est le fondement même de toute véritable démocratie. Votre voix compte 1:1 comme tous les autres, ici la gouvernance s'opère par démocratie directe avec un modèle de décision strictement horizontal. Si l'époque le demande, renseignez vous, puis choisissez, ensuite vous allez mettre en oeuvre le processus de compilation de 80K lignes de C++ qu'est devenu bitcoin et obtenir un binaire spécialement conçu pour s'exécuter sur votre machine.
+D'après ce que l'on sait, durant les années 2007 à 2008 une (ou des) personne(s) a pondu pas mal de lignes de code C++, puis les a lâchées dans le cyber-espace en 2009, un outil fonctionnel et potentiellement révolutionnaire est né. [Au fil du temps le code est ré-écrit](https://bitcoin.fr/au-coeur-du-code/), fiabilisé et amélioré par une équipe connue depuis 2010 \~ 2011 sous le nom de "core developers". Cela peut paraître perturbant mais tout code informatique doit être amélioré, fiabilisé et sécurisé. L'idée de départ parait parfaite mais sa transcription exacte en code informatique est très délicate, le résultat est donc surement qualifiable d'imparfait. Qui plus est : le 3 janvier 2009 le jour du bloc genesis, le comité était réduit à une poignée d'individus voire moins, face à des milliers de lignes de code Open Source mettant en oeuvre un concept jusque-là jamais atteint, une équipe sera ensuite bien plus forte qu'un ou quelques individus. Plus le temps passe et plus nous pouvons dire que cela se rapproche de la perfection ***à condition*** que l'équipe en charge du code conserve l'idéologie et la philosophie initiale. A souligner également, l'environnement autour de Bitcoin n'est pas figé, il peut changer ou évoluer. Ici également il faudra que les "core developers" effectuent ce qu'il faut. En tant qu'individu et gardien du registre distribué vous ferez respecter le consensus, face au code vous avez votre mot à dire, vous pouvez le choisir, avoir le choix est important et primordial, c'est le fondement même de toute véritable démocratie. Votre voix compte 1:1 comme tous les autres, ici la gouvernance s'opère par démocratie directe avec un modèle de décision strictement horizontal. Si l'époque le demande, renseignez vous, puis choisissez, ensuite vous allez mettre en oeuvre le processus de compilation de 80K lignes de C++ qu'est devenu Bitcoin et obtenir un binaire spécialement conçu pour s'exécuter sur votre machine.
 
 Pour choisir la version que vous souhaitez construire, faites `git -C ~/code/bitcoin tag`\n ou allez voir les [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), en octobre 2024 nous sommes loin de la "Guerre des blocs" de 2015 à 2017, la période est apparemment calme et sereine, donc se limiter à deux choix me semble raisonnable, cela donne :
 
 * 'v28.0' pour la dernière "final" qui intègre des améliorations et des correctifs.
 * 'v27.1' l'avant-dernière "final", contient des correctifs pour l'essentiel.
 
-*Note : vous avez d'autres choix que bitcoin core, comme par exemple [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin), faites vous propres recherches …* 
+*Note : vous avez d'autres choix que Bitcoin Core, comme par exemple [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin), faites vous propres recherches …* 
 
 Ci dessous je choisi la  v28.0 sans les options de test de débogage et de performance :
 
@@ -212,7 +214,7 @@ Si vous avez paramétré une option mais qu'à l'arrivée elle est absente, rega
 
 gui signifie Graphical User Interface et qt est un framework de développement multi-plateforme pour la création d'applications et d'interfaces utilisateur graphiques avec C++
 
-A propos du terme USDT, cela n'a rien à voir avec les "stablecoins", c'est utilisé pour activer les traces utilisateur statiquement définies, ce sont des outils de traçage pour l'analyse des performances et le débogage. C'est très intéressant mais hors du "scope" ici. Poursuivre en remarquant que la compilation (la ligne make) dure 1 à 2 heures sur un Raspberry Pi 5 / NVMe.M2 en fonction des options (si tests, fuzz binary et bench sont actives cela rallonge le temps de compilation) et environ 20mn sur le Dell Optiplex 5050. Pendant ce temps vous pouvez ouvrir un nouveau terminal et installer Tor, I2P,  … ou continuer à flâner dans le code source ou la documentation de bitcoin. N'oubliez pas de taper la deuxième ligne !
+A propos du terme USDT, cela n'a rien à voir avec les "stablecoins", c'est utilisé pour activer les traces utilisateur statiquement définies, ce sont des outils de traçage pour l'analyse des performances et le débogage. C'est très intéressant mais hors du "scope" ici. Poursuivre en remarquant que la compilation (la ligne make) dure 1 à 2 heures sur un Raspberry Pi 5 / NVMe.M2 en fonction des options (si tests, fuzz binary et bench sont actives cela rallonge le temps de compilation) et environ 20mn sur le Dell Optiplex 5050. Pendant ce temps vous pouvez ouvrir un nouveau terminal et installer Tor, I2P,  … ou continuer à flâner dans le code source ou la documentation de Bitcoin. N'oubliez pas de taper la deuxième ligne !
 
 ```bash
 make
@@ -221,7 +223,7 @@ sudo make install
 
 ### **Installer Tor et I2P**
 
-Ces deux réseaux, qui se superposent à internet, apportent une couche d'anonymisation. Tous deux procurent un espace de liberté et de souveraineté individuelles, et d'autre part ils procurent à bitcoin une résilience et une résistance à la censure accrues. Commençons par Tor:
+Ces deux réseaux, qui se superposent à internet, apportent une couche d'anonymisation. Tous deux procurent un espace de liberté et de souveraineté individuelles, et d'autre part ils procurent à Bitcoin une résilience et une résistance à la censure accrues. Commençons par Tor:
 
 ```bash
 sudo apt-get install tor
@@ -255,7 +257,7 @@ Détecter le groupe Tor utilisé dans la distribution :
 sudo ls -al /run/tor/control.authcookie
 ```
 
-Pour la Debian la réponse est "debian-tor", et dans mon cas c'est l'utilisateur "btc-node" (que j'ai créé à l'installation de ma distribution) qui lancera le programme bitcoind, cela donne pour moi  :
+Pour la Debian la réponse est "debian-tor", et dans mon cas c'est l'utilisateur "btc-node" (que j'ai créé à l'installation de ma distribution) qui lancera le programme `bitcoind`, cela donne pour moi  :
 
 ```bash
 sudo usermod -a -G debian-tor btc-node
@@ -268,7 +270,7 @@ exit
 ssh nom_utilisateur@IP
 ```
 
-Passons à [I2P](#h-i2p)
+Passons à I2P
 
 ```bash
 sudo apt-get install i2pd
@@ -280,7 +282,7 @@ Pour plus tard, si vous voulez voir les logs I2P :
 sudo tail -f /var/log/i2pd/i2pd.log
 ```
 
-CJDNS est une autre solution d'anonymisation supportée par bitcoin core, sa mise en oeuvre est relativement compliquée et elle me semble moins utilisé que Tor ou I2P, je l'ai explorée, je reviendrais mettre à jour ici si je trouve que cela est concluant.
+CJDNS est une autre solution d'anonymisation supportée par Bitcoin Core, sa mise en oeuvre est relativement compliquée et elle me semble moins utilisé que Tor ou I2P, je l'ai explorée, je reviendrais mettre à jour ici si je trouve que cela est concluant.
 
 
 ### **SSH et la sécurité**
@@ -341,11 +343,11 @@ En cas d'échec vous avez toujours accès à \[bitcoin\] par l'ouverture de la p
 \[PC\] S'il est nécessaire d'effacer un "host" en particulier dans `.ssh/known_hosts`, la commande est : `ssh-keygen -R <hostname>` , `hostname` désigne une IP ou un nom de machine sur le réseau local.\n\[PC\] si vous devez accéder par ssh à plus d'un hôte avec cette méthode, il faudra définir un fichier `config` dans le répertoire `~/.ssh` avec la description de chaque hôte.
 
 
-### Séparer les données bitcoin de l'OS
+### Séparer les données Bitcoin de l'OS
 
  **A effectuer seulement si vous avez 2 unités de stockage distinctes.**
 
-Les données blockchain d'un nœud complet sont imposantes (650 Go en octobre 2024), si vous ne pouvez plus mettre à jour l'Operating System ou rencontrez un problème avec celui-ci ou avec la machine elle-même, il est judicieux de séparer les données du nœud bitcoin du reste.
+Les données blockchain d'un nœud complet sont imposantes (650 Go en octobre 2024), si vous ne pouvez plus mettre à jour l'Operating System ou rencontrez un problème avec celui-ci ou avec la machine elle-même, il est judicieux de séparer les données du nœud Bitcoin du reste.
 
 Si le deuxième stockage de masse n'est pas monté au démarrage de la machine, utiliser la commande `lsblk` pour obtenir le "NAME" de tous les périphériques branchés, si c'est partitionné "TYPE" indiquera `part` , et s'ils sont montés ce sera indiqué à la colonne "MOUNTPOINTS". Sur mon Dell Optiplex c'est `nvme0n1` de 1.9T et il n'est pas monté.
 
@@ -393,7 +395,7 @@ UUID=uuid_of_your_device /mnt/nvme   ext4    defaults        0       2
 
 Redémarrer la machine par `sudo shutdown -r now` et vérifier que le périphérique est bien monté automatiquement. Pour copier des fichiers et faire tout un tas de choses (y compris tout massacrer), depuis une éternité il existe sous Debian un gestionnaire de fichier en mode texte, un clone de Norton Commander, que j'affectionne bien et avec lequel vous pouvez utiliser la souris en mode texte dans un terminal : "Midnight Commander" alias `mc` si cela vous tente c'est `sudo apt-get install mc` .
 
-Pour finir, si le répertoire `~/.bitcoin` est présent vérifiez qu'il soit vide, ensuite supprimez le. Créez un lien symbolique appelé `.bitcoin` dans le home de l'utilisateur qui lancera le nœud bitcoin, et qui pointera vers votre unité de stockage dédié à cela.
+Pour finir, si le répertoire `~/.bitcoin` est présent vérifiez qu'il soit vide, ensuite supprimez le. Créez un lien symbolique appelé `.bitcoin` dans le home de l'utilisateur qui lancera le nœud Bitcoin, et qui pointera vers votre unité de stockage dédié à cela.
 
 ```bash
 # Adaptez le chemin à votre peripherique
@@ -401,11 +403,11 @@ ln -s /mnt/nvme/bitcoin ~/.bitcoin
 ```
 
 
-### **Paramétrage de bitcoin core**
+### **Paramétrage de Bitcoin Core**
 
 `bitcoin.conf` est le fichier de configuration de `bitcoind` le logiciel "nœud bitcoin".
 
-`bitcoind` (d à la fin pour "daemon", un démon logiciel est un processus qui tourne en arrière plan) lancé sans fichier de configuration fonctionne très bien. Pour l'arrêter tapez "CTRL-C" quand il n'est pas explicitement lancé en mode démon.
+`bitcoind` (d à la fin pour "daemon", un démon logiciel est un processus qui tourne en arrière plan) lancé sans fichier de configuration fonctionne très bien. Pour l'arrêter tapez "CTRL-C" quand il n'est pas explicitement lancé en mode démon. S'il est en mode démon utiliser le programme `bitcoin-cli`  (acronyme de Bitcoin Command Line Interface) qui communique avec lui, pour arrêter le démon c'est `bitcoin-cli stop`
 
 **Sachez que dès son lancement**, vu que vous avez zéro bloc dans votre nœud, `bitcoind` va **obsessionnellement** aller les chercher auprès d'autres nœuds sans utiliser de surcouche d'anonymisation. Donc effectuez ce qui suit puis choisissez.
 
@@ -417,7 +419,7 @@ touch ~/.bitcoin/debug.log # pour être en mesure de suivre les logs dès le lan
 nano ~/.bitcoin/bitcoin.conf
 ```
 
-Copier / coller ceci dans le fichier 'bitcoin.conf' :
+Copier / coller ceci dans le fichier `bitcoin.conf` :
 
 ```bash
 # Ce fichier de configuration doit etre dans le chemin
@@ -426,12 +428,12 @@ Copier / coller ceci dans le fichier 'bitcoin.conf' :
 # Pour plus d'informations visitez 
 # https://jlopp.github.io/bitcoin-core-config-generator/
 
-# En activant ce mode, le noeud accepte les connexions
-# et commandes RPC (Remote Procedure Call) externes.
-server=1
+# En activant ce mode, le noeud accepte les connexions et commandes RPC (Remote Procedure Call) 
+# et notamment les commandes de "bitcoin-cli"
+server=1 # Laisser actif si daemon=1
 
 # bitcoind est lance en tache de fond comme un demon et accepte les commandes
-# Avec ce parametre a 1 pour le stopper saisir 'bitcoin-cli stop'
+# Avec ce parametre a 1 pour le stopper utiliser la commande 'bitcoin-cli stop'
 daemon=1
 
 # 1 = CPU_CORES, 0 = automatique, moins de zero = laisse ce nombre de coeur CPU libre(s)
@@ -556,7 +558,6 @@ Voir le nombre d'adresses connues par votre nœud : `bitcoin-cli -addrinfo`
 Informations sur le wallet qui vient avec bitcoind : `bitcoin-cli getwalletinfo`
 
 
-\
 ### Détail des connexions réseau
 
 Voici un aperçu des pairs entrants et sortants après plusieurs jours de fonctionnement sans interruption. Ne soyez pas pressés, cela prends du temps.
@@ -605,13 +606,13 @@ type, niveau de service fourni par le pair
 * **vide**, normal c'est in.
 * **full**, le pair peut fournir l'intégralité de la blockchain, il la conserve en totalité, offrant ainsi une validation complète des transactions.
 * **block**, pour économiser de la place le pair ne conserve pas les blocs les plus anciens (pruned node ou nœud élagué) , il ne peut fournir que les blocs les plus récents.
-* **feeler**, connexions sortantes utilisées par les nœuds bitcoin pour vérifier l'état du réseau et trouver de nouveaux pairs. Elles sont temporaires et permettent de s'assurer que le nœud reste connecté à un ensemble diversifié de pairs pour maintenir la robustesse du réseau.
-* **terrible**, utilisé lorsqu'une adresse de pair échoue à se connecter suffisamment de fois, elle est qualifiée de « terrible » pour indiquer qu'elle est peu fiable. Si une nouvelle adresse entrante entre en collision avec une adresse « terrible », cette dernière est expulsée de la table des nouvelles connexions, ce qui signifie qu'elle ne sera plus considérée pour de nouvelles connexions. Cela aide à maintenir la qualité et la fiabilité des connexions dans le réseau bitcoin en éliminant les pairs problématiques.
+* **feeler**, connexions sortantes utilisées par les nœuds Bitcoin pour vérifier l'état du réseau et trouver de nouveaux pairs. Elles sont temporaires et permettent de s'assurer que le nœud reste connecté à un ensemble diversifié de pairs pour maintenir la robustesse du réseau.
+* **terrible**, utilisé lorsqu'une adresse de pair échoue à se connecter suffisamment de fois, elle est qualifiée de « terrible » pour indiquer qu'elle est peu fiable. Si une nouvelle adresse entrante entre en collision avec une adresse « terrible », cette dernière est expulsée de la table des nouvelles connexions, ce qui signifie qu'elle ne sera plus considérée pour de nouvelles connexions. Cela aide à maintenir la qualité et la fiabilité des connexions dans le réseau Bitcoin en éliminant les pairs problématiques.
 * **manual**, connexion à un nœud défini par `addnode` ou `connect` dans `bitcoin.conf` 
 
 net, informations sur les connexions réseau du nœud
 
-* 'npr' pour "Not Publicly Routable", mon nœud bitcoin est connecté à un pair dont l'adresse ip n'est pas publiquement routable. Chaque nœud du réseau partage également les informations des autres et un nœud peut conserver les informations dans sa propre base de données locale de nœuds connus, de sorte que d'autres ou vous, pouvez vous connecter à l'autre même si l'ip n'est pas publiquement routable. Dans ce cas "bitcoind" crée des ports locaux (127.0.0.1:xxxxx) dynamiques pour pouvoir échanger avec ces pairs.
+* 'npr' pour "Not Publicly Routable", mon nœud Bitcoin est connecté à un pair dont l'adresse ip n'est pas publiquement routable. Chaque nœud du réseau partage également les informations des autres et un nœud peut conserver les informations dans sa propre base de données locale de nœuds connus, de sorte que d'autres ou vous, pouvez vous connecter à l'autre même si l'ip n'est pas publiquement routable. Dans ce cas `bitcoind` crée des ports locaux (127.0.0.1:xxxxx) dynamiques pour pouvoir échanger avec ces pairs.
 * onion : la connexion au pair s'effectue par TOR
 * i2p : la connexion au pair s'effectue par I2P
 
@@ -619,7 +620,7 @@ v, version utilisé pour la connexion
 
 * v1 correspond à un mode de connexion ou sous-protocole plus ancien ou simplifié
 * v2 correspond à mode de connexion ou sous-protocole plus récent, offrant des améliorations en termes de sécurité et de performance.
-* en règle générale la version du protocole le plus ancien est utilisé par les versions de "Bitcoin Core" plus anciennes, mais pas que : pour certaines raisons (configuration réseau, rétrocompatibilité, mises à jour progressives) une même version de "Bitcoin Core" peut utiliser soit v1 soit v2.  L'utilisateur n'a pas la main là-dessus, c'est "bitcoind" qui choisit automatiquement la version du sous-protocole en fonction des configurations et capacités du pair avec lequel il se connecte.
+* en règle générale la version du protocole le plus ancien est utilisé par les versions de Bitcoin Core plus anciennes, mais pas que : pour certaines raisons (configuration réseau, rétrocompatibilité, mises à jour progressives) une même version de Bitcoin Core peut utiliser soit v1 soit v2.  L'utilisateur n'a pas la main là-dessus, c'est `bitcoind` qui choisit automatiquement la version du sous-protocole en fonction des configurations et capacités du pair avec lequel il se connecte.
 
 mping (mean ping)
 
@@ -653,7 +654,7 @@ hb
 
 addrp (address requests peer)
 
-* c'est une demande d'adresse au pair. Mon nœud demande des informations sur d'autres nœuds du réseau bitcoin à ce pair spécifique. C'est essentiel pour découvrir et se connecter à davantage de nœuds pour une meilleure connectivité et résilience du réseau.
+* c'est une demande d'adresse au pair. Mon nœud demande des informations sur d'autres nœuds du réseau Bitcoin à ce pair spécifique. C'est essentiel pour découvrir et se connecter à davantage de nœuds pour une meilleure connectivité et résilience du réseau.
 
 addrl (address replies peer)
 
@@ -665,21 +666,21 @@ age
 
 id
 
-* chaque pair se voit attribuer un identifiant unique lorsqu'il se connecte à mon nœud. Cet identifiant est temporaire et spécifique à la session de connexion. L'id permet à "bitcoin core" de gérer les connexions, les envois et les réceptions de messages, ainsi que d'effectuer le suivi des statistiques et des performances de chaque pair individuel. L'identifiant unique est utile pour diagnostiquer et résoudre des problèmes de connectivité ou de performance en permettant de suivre les interactions spécifiques avec chaque pair. Le pair est identifié dans les logs par cette id.
+* chaque pair se voit attribuer un identifiant unique lorsqu'il se connecte à mon nœud. Cet identifiant est temporaire et spécifique à la session de connexion. L'id permet à Bitcoin Core" de gérer les connexions, les envois et les réceptions de messages, ainsi que d'effectuer le suivi des statistiques et des performances de chaque pair individuel. L'identifiant unique est utile pour diagnostiquer et résoudre des problèmes de connectivité ou de performance en permettant de suivre les interactions spécifiques avec chaque pair. Le pair est identifié dans les logs par cette id.
 
 address
 
 * adresse IP ou TOR(onion:8333) ou I2P(b32.i2p) du pair
-* si l'adresse est de la forme \[localhost:port_dynamique\] comme \[127.0.0.1:xxxxx\], le pair ne divulgue pas son adresse externe (dans 'bitcoin.conf' le paramètre 'externalip' est non configuré) ou c'est une IP npr.
+* si l'adresse est de la forme \[localhost:port_dynamique\] comme \[127.0.0.1:xxxxx\], le pair ne divulgue pas son adresse externe (dans `bitcoin.conf` le paramètre `externalip` est non configuré) ou c'est une IP npr.
 
 version
 
-* "Protocol version" suivi de "subversion" du logiciel "Bitcoin Core" utilisé par le pair
+* "Protocol version" suivi de "subversion" du logiciel Bitcoin Core utilisé par le pair
 
 
-### Mise en place du service "bitcoind"
+### Mise en place du service `bitcoind`
 
-Votre nœud est maintenant synchronisé, passez à mise en place du service permettant d'automatiser le lancement et l'arrêt du nœud bitcoin au lancement et à l'arrêt de la machine. Dans un premier temps, créer le fichier `bitcoin.service`
+Votre nœud est maintenant synchronisé, passez à mise en place du service permettant d'automatiser le lancement et l'arrêt du nœud Bitcoin au lancement et à l'arrêt de la machine. Dans un premier temps, créer le fichier `bitcoin.service`
 
 ```none
 sudo nano /etc/systemd/system/bitcoin.service
@@ -741,9 +742,9 @@ Pour info si vous souhaitez désactiver ce service  `sudo systemctl disable bitc
 
 ## Choix de connexion portefeuille à nœud personnel
 
-Souveraineté individuelle ou ne dépendre d'aucune entité, c'est beau mais surtout important. Vous voulez effectuer un transfert de valeur : votre portefeuille est connecté à votre propre nœud, vous initiez une nouvelle transaction (origination) qui sera signée avec vos clés privées signifiant l'autorisation de dépenser les fonds référencés. Elle est ensuite diffusée de nœuds en nœuds. Chaque nœud vérifie la validité de cette transaction, quand c'est fait les nœuds stockent celle-ci dans une mémoire temporaire appelée "mempool", les nœuds propagent également le "mempool" aux autres nœuds afin que chaque nœud dispose des mêmes transactions en attente. Les mineurs sélectionnent les transactions à partir du "mempool" afin de créer un nouveau bloc, ils sont en compétition entre eux pour résoudre un problème cryptographique. Le premier qui a trouvé gagne la récompense de bloc et tous les frais de transaction. Il propose le nouveau bloc aux nœuds qui le vérifient afin de l'intégrer dans leur copie de la "blockchain". Les nœuds mettent à jour la "mempool" en retirant toutes les transactions qui ont été intégrées dans le nouveau bloc. Là il s'est écoulé approximativement 10mn … et cela dure depuis 15 ans, oui **bitcoin EST un ovni monétaire**.
+Souveraineté individuelle ou ne dépendre d'aucune entité, c'est beau mais surtout important. Vous voulez effectuer un transfert de valeur : votre portefeuille est connecté à votre propre nœud, vous initiez une nouvelle transaction (origination) qui sera signée avec vos clés privées signifiant l'autorisation de dépenser les fonds référencés. Elle est ensuite diffusée de nœuds en nœuds. Chaque nœud vérifie la validité de cette transaction, quand c'est fait les nœuds stockent celle-ci dans une mémoire temporaire appelée "mempool", les nœuds propagent également le "mempool" aux autres nœuds afin que chaque nœud dispose des mêmes transactions en attente. Les mineurs sélectionnent les transactions à partir du "mempool" afin de créer un nouveau bloc, ils sont en compétition entre eux pour résoudre un problème cryptographique. Le premier qui a trouvé gagne la récompense de bloc et tous les frais de transaction. Il propose le nouveau bloc aux nœuds qui le vérifient afin de l'intégrer dans leur copie de la "blockchain". Les nœuds mettent à jour la "mempool" en retirant toutes les transactions qui ont été intégrées dans le nouveau bloc. Là il s'est écoulé approximativement 10mn … et cela dure depuis 15 ans, oui **Bitcoin EST un ovni monétaire**.
 
-Pour connecter un portefeuille à un nœud il y a différentes solutions, cela peut demander des données et des ressources supplémentaires. En octobre 2024 j'ai comparé ces données supplémentaires avec la taille de la blockchain bitcoin elle-même.
+Pour connecter un portefeuille à un nœud il y a différentes solutions, cela peut demander des données et des ressources supplémentaires. En octobre 2024 j'ai comparé ces données supplémentaires avec la taille de la blockchain Bitcoin elle-même.
 
 | Données | Taille | Information |
 |----|----|----|
@@ -756,16 +757,16 @@ Donc `bitcoind` intègre un wallet avec lequel vous pouvez interagir, les clés 
 
 Ensuite gardez à l'esprit que votre nœud est constamment connecté à Internet et donc exposé à des risques potentiels. Si le wallet intégré à bitcoind est utilisé (directement ou avec la librairie Cormorant), cela peut faire de vous une cible si votre solde est découvert. Pour voir le solde, les clés publiques et si les clés privées sont actives, tapez : `bitcoin-cli getwalletinfo`. Si la sortie indique bien `private_keys_enabled : false`, il sera donc impossible de "dépenser" à partir de là.
 
-Afin d'élargir le choix des portefeuilles utilisables, il est opportun d'installer un serveur Electrum sur le nœud bitcoin. Il sera ensuite possible d'utiliser le portefeuille Electrum ou un autre pourvu qu'il soit compatible avec le format [SPV](#h-spv) d'Electrum. Quand la date de naissance du portefeuille est inconnue (date de la 1 ère transaction) et que toute la blockchain doit être parcourue depuis l'origine il est a remarquer que le format SPV permet d'obtenir le solde bitcoin bien plus rapidement que l'utilisation directe ou indirecte du wallet de bitcoin core et ce même avec blockfilterindex activé.
+Afin d'élargir le choix des portefeuilles utilisables, il est opportun d'installer un serveur Electrum sur le nœud Bitcoin. Il sera ensuite possible d'utiliser le portefeuille Electrum ou un autre pourvu qu'il soit compatible avec le format SPV d'Electrum. Quand la date de naissance du portefeuille est inconnue (date de la 1 ère transaction) et que toute la blockchain doit être parcourue depuis l'origine le format SPV permet d'obtenir le solde bitcoin bien plus rapidement que l'utilisation directe ou indirecte du wallet de Bitcoin Core et ce même avec "blockfilterindex" activé.
 
 Avant de se lancer dans d'autres installations, et que l'un n'empêche pas l'autre, ci-dessous la configuration `bitcoin.conf`  pour une connexion directe portefeuille à bitcoin core par rpc (Remote Procedure Call ou appel de procédure distante).
 
 
-### Portefeuille connecté à bitcoin core
+### Portefeuille connecté à Bitcoin Core
 
 Si vous préférez le standard de communication SPV Electrum, sautez donc ce paragraphe !
 
-Vérifiez d'abord si le portefeuille que vous utilisez est capable de se connecter directement au nœud bitcoin. [Point de départ pour évaluer les wallets](https://bitcoin.org/en/choose-your-wallet?step=5), sélectionnez ensuite votre matériel / OS.
+Vérifiez d'abord si le portefeuille que vous utilisez est capable de se connecter directement au nœud Bitcoin. [Point de départ pour évaluer les wallets](https://bitcoin.org/en/choose-your-wallet?step=5), sélectionnez ensuite votre matériel / OS.
 
 Rajoutez ces lignes à la fin de `bitcoin.conf` par `nano ~/.bitcoin/bitcoin.conf`
 
@@ -816,7 +817,7 @@ Your password:
 who-are-you-satoshi?
 ```
 
-En fonction de vos choix, modifiez la ligne rpcauth de `bitcoin.conf`, redémarrez `bitcoind`, puis installez sur votre ordinateur personnel un portefeuille capable de se connecter directement à votre nœud bitcoin, par exemple Sparrow wallet qui utilise la librairie Cormorant, puis  allez dans :
+En fonction de vos choix, modifiez la ligne rpcauth de `bitcoin.conf`, redémarrez `bitcoind`, puis installez sur votre ordinateur personnel un portefeuille capable de se connecter directement à votre nœud Bitcoin, par exemple Sparrow wallet qui utilise la librairie Cormorant, puis  allez dans :
 
 `File/Preferences puis Server`
 
@@ -874,7 +875,7 @@ sudo chgrp root /usr/local/bin/electrs
 
 **A effectuer seulement si vous avez 2 unités de stockage distinctes.**
 
-Comme pour bitcoin il est souhaitable de séparer les données `electrs` de l'Operating System. Si le répertoire `~/.electrs`est présent vérifiez qu'il soit vide, ensuite supprimez le.
+Comme pour Bitcoin il est souhaitable de séparer les données `electrs` de l'Operating System. Si le répertoire `~/.electrs`est présent vérifiez qu'il soit vide, ensuite supprimez le.
 
 ```bash
 # Creer le repertoire electrs sur l'unite de stockage separee de l'OS
@@ -944,7 +945,7 @@ Régler les permissions par `chmod 600 ~/.electrs/electrs.toml`
 Le démon `bitcoind` est lancé et c'est synchronisé à 100% ?
 
 * Non → faire le nécessaire
-* Oui -> poursuivre
+* Oui  →$$$$poursuivre
 
 Dans un premier temps lancer manuellement Electrum server par :
 
@@ -1114,7 +1115,7 @@ Observez les logs par `sudo journalctl -f | grep electrs`
 
 ### Utiliser Tor
 
-Ou que vous soyez sur la planète, si vous avez accès à internet vous aurez également accès à votre serveur Electrum et pourrez interagir avec la blockchain bitcoin à travers votre propre nœud en toute confidentialité. A travers Tor c'est plus lent tout en étant parfaitement utilisable.
+Ou que vous soyez sur la planète, si vous avez accès à internet vous aurez également accès à votre serveur Electrum et pourrez interagir avec la blockchain Bitcoin à travers votre propre nœud en toute confidentialité. A travers Tor c'est plus lent tout en étant parfaitement utilisable.
 
 Editer le fichier de configuration `sudo nano /etc/tor/torrc` et rajouter ces lignes à la fin :
 
@@ -1141,7 +1142,7 @@ Sur certains portefeuilles comme Electrum mettez un t à la fin comme `votre_adr
 
 ### Seed phrase
 
-Également connue sous le nom de phrase de récupération ou phrase mnémonique, cette suite de mots est générée lors de la création du portefeuille. Elle est généralement composée de 12, 18 ou 24 mots choisis aléatoirement dans une liste prédéfinie de 2048 mots anglais, elle permet de restaurer l'accès à son portefeuille en cas de perte ou destruction des clés. Bien évidemment il est très important de conserver cette liste en lieu sûr; mais également puisque qu'à partir de celle-ci n'importe qui peut effectuer des transactions en créant un doublon du portefeuille. De plus gardez en mémoire qu'il est toujours utilisé des fonctions à sens unique pour passer de la seed phrase à la clé privée maîtresse ainsi qu'à toutes les autres clés et ce jusque aux adresses publiques bitcoin.
+Également connue sous le nom de phrase de récupération ou phrase mnémonique, cette suite de mots est générée lors de la création du portefeuille. Elle est généralement composée de 12, 18 ou 24 mots choisis aléatoirement dans une liste prédéfinie de 2048 mots anglais, elle permet de restaurer l'accès à son portefeuille en cas de perte ou destruction des clés. Bien évidemment il est très important de conserver cette liste en lieu sûr; mais également puisque qu'à partir de celle-ci n'importe qui peut effectuer des transactions en créant un doublon du portefeuille. De plus gardez en mémoire qu'il est toujours utilisé des fonctions à sens unique pour passer de la seed phrase à la clé privée maîtresse ainsi qu'à toutes les autres clés et ce jusque aux adresses publiques Bitcoin.
 
 La seed phrase a grandement simplifié et sécurisé la gestion des clés en permettant de dériver hiérarchiquement toutes celles-ci à partir d'un ensemble de mots. Les portefeuilles utilisant la seed phrase sont qualifiés de déterministes (ou HD Wallet, pour Hierarchical Deterministic Wallet). Cela permet également une interopérabilité sécurisée entre différents portefeuilles.
 
@@ -1159,12 +1160,12 @@ Le choix du `P2` ou du type de script n'est pas anodin ! Commençons un tour d'h
 * Native Segwit (Bech32) : Frais inférieurs à ceux de Base58, mais certains portefeuilles anciens ne le prennent pas en charge. `P2WPKH`
 * Taproot (Bech32m) : Frais les plus bas, mais la prise en charge des portefeuilles est encore limitée. `P2TR`
 
-J'ai obtenu cela en téléchargeant les sources de bitcoin knots et en effectuant cette recherche :
+J'ai obtenu cela en téléchargeant les sources de Bitcoin Knots et en effectuant cette recherche :
 
  `find  ~/code/bitcoin -type f -exec grep -H 'Widest compatibility and best' {} \;` 
 
 
-[Tableau d'utilisation des "Pay to"](https://unchained.com/blog/bitcoin-address-types-compared/?utm_campaign=btcmag-launch) depuis l'origine de bitcoin
+[Tableau d'utilisation des "Pay to"](https://unchained.com/blog/bitcoin-address-types-compared/?utm_campaign=btcmag-launch) depuis l'origine de Bitcoin
 
 | **Type** | **1 ère vue** | **BTC Supply ¹** | **Utilisation ¹** | Appellation courante | **Encodage** | **Préfixe addr** |
 |----|----|----|----|----|----|----|
@@ -1203,19 +1204,19 @@ Cela a constitué une solution de transition permettant de bénéficier des amé
 
 **Taproot**
 
-est la dernière évolution importante du protocole, il a été introduit par 3 BIPs (Bitcoin Improvement Proposals), ces propositions d'améliorations ont commencé en janvier 2018, l'activation a eu lieu le 14 novembre 2021.
+est la dernière évolution importante du protocole, il a été introduit par 3 BIPs, ces propositions d'améliorations ont commencé en janvier 2018, l'activation a eu lieu le 14 novembre 2021.
 
 * BIP340 : Introduit les signatures Schnorr permettant de combiner plusieurs signatures en une seule. Les adresses et les transactions multi-signatures sont indiscernables des simples. Cela améliore l'efficacité, la confidentialité et la taille des transactions, diminue les frais des transactions multi-signatures ou utilisant des scripts complexes .
 * BIP341 : mise à jour Taproot. En n'exposant que les détails de la transaction exécutée, Taproot offre une plus grande confidentialité aux utilisateurs. En effet les informations de transactions non exécutées, qui peuvent contenir des informations privées sensibles, ne sont plus enregistrées sur la blockchain.
-* BIP342 : introduit Tapscript, cela dote bitcoin d'un langage de programmation de transactions amélioré, axé sur la technologie Schnorr et Taproot. Permet des scripts de transactions plus flexibles et puissants.
+* BIP342 : introduit Tapscript, cela dote Bitcoin d'un langage de programmation de transactions amélioré, axé sur la technologie Schnorr et Taproot. Permet des scripts de transactions plus flexibles et puissants.
 
-Taproot a introduit des fonctionnalités avancées comme les contrats intelligents, il permet également d'optimiser l'espace dans les blocs. Pour information la taille maximale des blocs est limité à 4 Mo depuis l'implémentation de Segregated Witness (SegWit) d'août 2017, ne l'oublions pas à l'origine c'était 1 Mo. La blockchain augmente immuablement de 144 blocs par jour et de 52560 par an, [la taille des blocs est variable et fonction de l'activité, de l'usage](https://www.blockchain.com/fr/explorer/charts/blocks-size). D'avril 2023 à avril 2024 la taille moyenne d'un bloc est de 1.75Mo, si je prends 2 Mo par bloc cela donne 103 Go de + par an. Mon NVMe.M2 de 2 To sera approximativement blindé en 2036, dans 12 ans. Les capacités et les vitesses de transfert des stockages de masse n'aurons de cesse de s'améliorer dans le futur, il est envisageable que le code de bitcoin s'adaptera à nouveau.
+Taproot a introduit des fonctionnalités avancées comme les contrats intelligents, il permet également d'optimiser l'espace dans les blocs. Pour information la taille maximale des blocs est limité à 4 Mo depuis l'implémentation de Segregated Witness (SegWit) d'août 2017, ne l'oublions pas à l'origine c'était 1 Mo. La blockchain augmente immuablement de 144 blocs par jour et de 52560 par an, [la taille des blocs est variable et fonction de l'activité, de l'usage](https://www.blockchain.com/fr/explorer/charts/blocks-size). D'avril 2023 à avril 2024 la taille moyenne d'un bloc est de 1.75Mo, si je prends 2 Mo par bloc cela donne 103 Go de + par an. Mon NVMe.M2 de 2 To sera approximativement blindé en 2036, dans 12 ans. Les capacités et les vitesses de transfert des stockages de masse n'aurons de cesse de s'améliorer dans le futur, il est envisageable que le code de Bitcoin s'adaptera à nouveau.
 
 Revenons à Taproot, ces fonctionnalités supplémentaires facilitent ou permettent de nouvelles choses, comme par exemple l'introduction des Ordinals en optimisant la capacité de stockage des blocs et en simplifiant le stockage de données arbitraires. Les Ordinals sont un protocole qui permet d'inscrire des données (comme des images, des textes ou des vidéos) directement sur des satoshis individuels dans la blockchain. Ainsi un satoshi peut devenir un actif numérique unique, similaire à un NFT (Non-Fungible Token). 
 
-Certains diront que l'on s'éloigne vraiment de la philosophie initiale et de la simplicité originale de bitcoin, **dans le fond ils n'ont pas tord !**
+Certains diront que l'on s'éloigne vraiment de la philosophie initiale et de la simplicité originale de Bitcoin, **dans le fond ils n'ont pas tord !**
 
-A l'opposé des NFT, des contrats intelligents de la finance décentralisée, des "stablecoins" ces nouveautés facilitent également la réalisation des couches L2 sensées effectuer des micro-transactions quasi instantanées pour des frais réduits, ce dont la couche L1 est incapable avec 7 transactions par seconde en moyenne. A bien y réfléchir : les sommes importantes n'ont nullement besoin d'être déplacées à la vitesse de la lumière, donc bitcoin L1 convient parfaitement offrant une sécurité optimale. Les petits montants n'ont pas ce besoin de sécurité poussée donc les L2 sont tout à fait adaptées pour de nombreuses transactions quasi-instantanées. Cela permet de couvrir un large spectre d'utilisation sans dénaturer le concept initial de bitcoin et c'est tant mieux !
+A l'opposé des NFT, des contrats intelligents de la finance décentralisée, des "stablecoins" ces nouveautés facilitent également la réalisation des couches L2 sensées effectuer des micro-transactions quasi instantanées pour des frais réduits, ce dont la couche L1 est incapable avec 7 transactions par seconde en moyenne. A bien y réfléchir : les sommes importantes n'ont nullement besoin d'être déplacées à la vitesse de la lumière, donc Bitcoin L1 convient parfaitement offrant une sécurité optimale. Les petits montants n'ont pas ce besoin de sécurité poussée donc les L2 sont tout à fait adaptées pour de nombreuses transactions quasi-instantanées. Cela permet de couvrir un large spectre d'utilisation sans dénaturer le concept initial de Bitcoin et c'est tant mieux !
 
 *Conclusion pour le long court : sur les différents matériels et logiciels, le standard qui se dégage pour le moment est Segwit native, **et même si Legacy est "vieillissant" il très bien supporté*** également. *Ceci étant faites vos propres recherches et choisissez en connaissance de cause.*
 
@@ -1229,7 +1230,7 @@ Pour information voici les "Pay to" possibles avec le portefeuille Electrum :
 
 ### Inter-opérabilité des `Pay To`
 
-**Les scripts** `Pay To` **sont tous interopérables au niveau du protocole bitcoin et ce de manière transparente pour l'utilisateur.** Si vous rencontrez un problème dans lequel un type d'adresse ne peut pas être envoyé à un autre, il ne s'agit pas d'une limitation du code bitcoin, mais d'une limitation du portefeuille utilisé.
+**Les scripts** `Pay To` **sont tous interopérables au niveau du protocole Bitcoin et ce de manière transparente pour l'utilisateur.** Si vous rencontrez un problème dans lequel un type d'adresse ne peut pas être envoyé à un autre, il ne s'agit pas d'une limitation du code Bitcoin, mais d'une limitation du portefeuille utilisé.
 
 Parfois il est dit : "Les adresses Legacy (1..) ne sont pas compatibles avec Segwit (bc1q..)", cela signifie simplement qu'une adresse Legacy ne peut pas envoyer de transaction Segwit. Le type de transaction et la possibilité pour l'adresse de réception d'utiliser pleinement tous les avantages de la transaction dépendent de l'adresse d'envoi. Une adresse Legacy P2PKH peut transférer les droits de propriété BTC sur une adresse Segwit, cependant la transaction sera P2PKH et pas Segwit. Dans le détail cela donne :
 
@@ -1245,7 +1246,7 @@ Parfois il est dit : "Les adresses Legacy (1..) ne sont pas compatibles avec Seg
 
 ### La collision
 
-Les adresses bitcoin sont donc générées en aveugle et au hasard. A la création de mon portefeuille est t'il possible que je tombe sur une adresse ne m'appartenant pas ou qu'un jour un individu lambda tombe sur la mienne ? 
+Les adresses Bitcoin sont donc générées en aveugle et au hasard. A la création de mon portefeuille est t'il possible que je tombe sur une adresse ne m'appartenant pas ou qu'un jour un individu lambda tombe sur la mienne ? 
 
 **NON,** ce phénomène aussi appelé collision d'adresse est impossible !
 
@@ -1259,9 +1260,9 @@ cela n'arrivera jamais.
 
 Bilan : j'ai fait mes propres recherches, je peux générer un gros paquet d'adresses tranquillement.
 
-*Le génie de ce système est qu'il ne nécessite aucune coordination centrale pour l'attribution des adresses. Chaque utilisateur peut générer ses adresses de manière totalement indépendante, sans avoir besoin de vérifier si elles existent déjà. Ce principe simple mais puissant est l'un des aspects qui préserve la décentralisation de bitcoin.*
+*Le génie de ce système est qu'il ne nécessite aucune coordination centrale pour l'attribution des adresses. Chaque utilisateur peut générer ses adresses de manière totalement indépendante, sans avoir besoin de vérifier si elles existent déjà. Ce principe simple mais puissant est l'un des aspects qui préserve la décentralisation de Bitcoin.*
 
-(¹) Une adresse bitcoin est dérivée d'un hachage `RIPEMD-160(SHA-256(clé_publique))`, ce qui donne un espace de 2¹⁶⁰ possibilités, soit environ 1.46 × 10⁴⁸ adresses uniques.
+(¹) Une adresse Bitcoin est dérivée d'un hachage `RIPEMD-160(SHA-256(clé_publique))`, ce qui donne un espace de 2¹⁶⁰ possibilités, soit environ 1.46 × 10⁴⁸ adresses uniques.
 
 
 ### Le portefeuille logiciel Electrum
@@ -1294,7 +1295,7 @@ La syntaxe complète de connexion à un serveur comme `elects` est une URL du fo
 
 Vous pouvez ensuite interdire au portefeuille Electrum de scanner d'autres serveurs que le votre en éditant manuellement sa configuration par `nano ~/.electrum/config` chercher `"oneserver": false` puis remplacez `false` par `true` , relancez Electrum allez à network, il ne teste  plus les adresses différentes de la votre.
 
-A des fins didactiques avec Electrum il est possible d'importer une adresse bitcoin pour visualiser toutes les transactions effectuées sur celle ci, bien sur c'est en lecture seule (mode spectateur). Attention si vous tapez une adresse avec des milliers de transactions cela risque d'être long et risque de provoquer un time-out d'electrs si la machine est peu véloce. Adresses que j'ai testées avec succès sur mon nœud Dell Optiplex en laissant `index-lookup-limit` au paramétrage par défaut, par contre avec mon Raspberry Pi5 j'ai du modifier `electrs.toml` en rajoutant `index-lookup-limit = 1000`  :
+A des fins didactiques avec Electrum il est possible d'importer une adresse Bitcoin pour visualiser toutes les transactions effectuées sur celle ci, bien sur c'est en lecture seule (mode spectateur). Attention si vous tapez une adresse avec des milliers de transactions cela risque d'être long et risque de provoquer un time-out d'electrs si la machine est peu véloce. Adresses que j'ai testées avec succès sur mon nœud Dell Optiplex en laissant `index-lookup-limit` au paramétrage par défaut, par contre avec mon Raspberry Pi5 j'ai du modifier `electrs.toml` en rajoutant `index-lookup-limit = 1000`  :
 
 * Bloc 210 000 / Bloc du 1ᵉʳ halving adresse du mineur / last tx 22.02.2013 / 5206 transactions
   * `1NEU779yvLaFk39k4Q3QdLjwpWTdWCbzqL`
@@ -1303,7 +1304,7 @@ A des fins didactiques avec Electrum il est possible d'importer une adresse bitc
 * Bloc 873 652 / adresse du mineur / actif en 2024 / environ 1700 transactions
   * `3Awm3FNpmwrbvAFVThRUFqgpbVuqWisni9`
 
-Les autres portefeuilles capables de créer un wallet spectateur d'après une adresse publique sont bitcoin core et BlueWallet qui accepte la connection SPV à un serveur Electrum et également la connexion RPC à bitcoind (exécutables pour Android, IOS et macOS).
+Les autres portefeuilles capables de créer un wallet spectateur d'après une adresse publique sont Bitcoin Core et BlueWallet qui accepte la connection SPV à un serveur Electrum et également la connexion RPC à `bitcoind` (exécutables pour Android, IOS et macOS).
 
 **Pour connecter Electrum Android à votre nœud via TOR :**
 
@@ -1347,8 +1348,8 @@ Cette séparation des rôles est fondamentale pour la sécurité : même si votr
 |:---|----|----|----|----|
 | **Format** | Clé usb | Clé usb | Clé usb | Carte de crédit ou anneau |
 | **Matériel et fabricant du secure element (¹)** | Open source sauf le secure element EAL6+ `Infineon Technologies` | Partiellement open source, et non open source pour le secure element EAL5+ `STMicroelectronics` ou EAL6+ `Infineon Technologies` suivant l'année de fabrication. | Qualifiable d'open source car le secure element `Microchip Technology` ne stocke pas les clés privées. | Propriétaire, Secure element EAL6+ `Samsung` |
-| **Vérification, installation du firmware et de l'app bitcoin sur le dispositif - OS supportés** | Utilisation **obligatoire** de [Trezor Suite](https://trezor.io) (logiciel open source, supporte Tor)  - Windows / macOS / Linux / Android / iOS (portefeuille en lecture seule) | Utilisation **obligatoire** (²) de [Ledger Live](https://www.ledger.com) (logiciel open source, ne supporte pas Tor) - Windows / macOS / Linux(³) / Android / iOS non compatible | Utilisation **obligatoire** de BitBoxApp (logiciel open source, supporte Tor) - Windows / macOS / Linux(⁴) / Android | Utilisation **obligatoire** de Tangem Crypto Wallet (ios / android) application mobile pour interaction avec la carte ou le ring par NFC. |
-| **Support d'un nœud personnel par la suite logicielle du fabricant** | Oui avec le format Electrum SPV en clair, SSL ou TOR. Supporte également Blockbook personnel. | Oui par une connection RPC à bitcoin core dont le wallet doit être actif. Il est nécessaire d'installer Ledger SatStack, logiciel open-source qui est une passerelle entre Ledger Live et le nœud bitcoin complet. | Oui avec le format Electrum SPV en clair, SSL ou TOR | Non |
+| **Vérification, installation du firmware et de l'app Bitcoin sur le dispositif - OS supportés** | Utilisation **obligatoire** de [Trezor Suite](https://trezor.io) (logiciel open source, supporte Tor)  - Windows / macOS / Linux / Android / iOS (portefeuille en lecture seule) | Utilisation **obligatoire** (²) de [Ledger Live](https://www.ledger.com) (logiciel open source, ne supporte pas Tor) - Windows / macOS / Linux(³) / Android / iOS non compatible | Utilisation **obligatoire** de BitBoxApp (logiciel open source, supporte Tor) - Windows / macOS / Linux(⁴) / Android | Utilisation **obligatoire** de Tangem Crypto Wallet (ios / android) application mobile pour interaction avec la carte ou le ring par NFC. |
+| **Support d'un nœud personnel par la suite logicielle du fabricant** | Oui avec le format Electrum SPV en clair, SSL ou TOR. Supporte également Blockbook personnel. | Oui par une connection RPC à Bitcoin Core dont le wallet doit être actif. Il est nécessaire d'installer Ledger SatStack, logiciel open-source qui est une passerelle entre Ledger Live et le nœud Bitcoin complet. | Oui avec le format Electrum SPV en clair, SSL ou TOR | Non |
 | **Création du wallet et initialisation du PIN** | Electrum, Rabby, BlueWallet ... ou Trezor Suite | Uniquement sur le dispositif. | BitBoxApp  obligatoire | Tangem Crypto wallet |
 | **Phrase de récupération Single Seed BIP39** | Trezor Suite avec "anciennes sauvegardes" en 12 ou 24 mots mais capacité à restaurer en 18mots. Avec Electrum 12,18 ou 24 mots. | Création en 24 mots uniquement mais capacité à restaurer un portefeuille avec une phrase de récupération de 12, 18 ou 24 mots. | Création en 12 ou 24 mots avec capacité à restaurer un portefeuille avec une phrase de récupération de 12, 18 ou 24 mots. | Le fabricant privilégie un backup dans plusieurs exemplaires du dispositif sans phrase de récupération, il propose néanmoins 12 ou 24 mots. |
 | **Vérifier sur le dispositif  la phrase de récupération** | Oui | Oui en installant au préalable sur le device l'app Recovery Check à partir de Ledger Live | Oui | Non testé |
@@ -1380,14 +1381,14 @@ Cette séparation des rôles est fondamentale pour la sécurité : même si votr
 
 (⁶) Autres phrases de récupération sur Trezor wallet :
 
-* Trezor Suite propose [SLIP39](/doc/installation-dun-noeud-bitcoin-from-scratch-puis-devenez-un-gardien-souverain-0HcgyvUnsW) Shamir en 20 mots uniquement, avec Single-Share Backup (1 seul fragment) ou du Multi-Share Backup (2 à 16 fragments), il est possible de produire le Backup Multi-Share avec Single-Share. Les deux seront valables, à l'utilisateur de détruire ensuite le Single-Backup.
+* Trezor Suite propose SLIP39 Shamir en 20 mots uniquement, avec Single-Share Backup (1 seul fragment) ou du Multi-Share Backup (2 à 16 fragments), il est possible de produire le Backup Multi-Share avec Single-Share. Les deux seront valables, à l'utilisateur de détruire ensuite le Single-Backup.
 
 
-* Electrum est capable de créer un portefeuille avec un dispositif initialisé (vérification, installation du firmware et du micrologiciel bitcoin avec Trezor Suite car à la livraison le matériel est en "bootloader mode"). Il peut initier la procédure pour nommer l'appareil et activer son code Pin. En plus de BIP39 et avec "Show expert settings" Electrum propose la seed SLIP39 Shamir ou Super Shamir avec 20 ou 33 mots. Si vous êtes vraiment un expert, est proposé en plus : avec la phrase supplémentaire (hidden wallet) ou le Seedless Mode (master seed sans backup). Une fois le portefeuille ouvert dans Electrum vous aurez accès à presque toutes les fonctionnalités fournies par le dispositif en cliquant sur l'icône dans le coin inférieur d'Electrum.
+* Electrum est capable de créer un portefeuille avec un dispositif initialisé (vérification, installation du firmware et du micrologiciel Bitcoin avec Trezor Suite car à la livraison le matériel est en "bootloader mode"). Il peut initier la procédure pour nommer l'appareil et activer son code Pin. En plus de BIP39 et avec "Show expert settings" Electrum propose la seed SLIP39 Shamir ou Super Shamir avec 20 ou 33 mots. Si vous êtes vraiment un expert, est proposé en plus : avec la phrase supplémentaire (hidden wallet) ou le Seedless Mode (master seed sans backup). Une fois le portefeuille ouvert dans Electrum vous aurez accès à presque toutes les fonctionnalités fournies par le dispositif en cliquant sur l'icône dans le coin inférieur d'Electrum.
 
 (⁷) Les autres "Pay to" sont supportés avec un portefeuille tier tels que Sparrow ou Electrum. 
 
-(⁸) Effacement du Ledger Nano S+ : la ré-initialisation efface tout sauf le firmware, il est ensuite nécessaire de ré-installer l'app bitcoin avec Ledger Live.
+(⁸) Effacement du Ledger Nano S+ : la ré-initialisation efface tout sauf le firmware, il est ensuite nécessaire de ré-installer l'app Bitcoin avec Ledger Live.
 
 (⁹) En utilisant des chemins de dérivation ou des `Pay To` différents, il est possible de créer de multiples portefeuilles avec la même graine maîtresse (master seed), donc la même liste de mots. Attention il est préférable de noter les choix effectués puisque cela complexifie la gestion et la récupération en cas de problèmes.
 
@@ -1402,7 +1403,7 @@ Si vous avez un accès physique à un autre nœud de confiance vous pouvez copie
 
 Déplacer 650Go par le port usb a duré pour moi un peu moins de 5h avec un débit de 38 Mo/s.
 
-IMPORTANT : il est indispensable de noter la version de bitcoin core du nœud qui a fourni les blocs. Par exemple une sauvegarde de blockchain bitcoin core v28.0 ne peut pas être restauré sur un nœud bitcoin core v27.2, il faudra d'abord passer le nœud en V28.0 afin d'éviter une longue ré-indexation causé par le message "Corrupted block database detected.  Please restart with -reindex or -reindex-chainstate to recover".
+IMPORTANT : il est indispensable de noter la version de Bitcoin Core du nœud qui a fourni les blocs. Par exemple une sauvegarde de blockchain Bitcoin Core v28.0 ne peut pas être restauré sur un nœud Bitcoin Core v27.2, il faudra d'abord passer le nœud en V28.0 afin d'éviter une longue ré-indexation causé par le message "Corrupted block database detected.  Please restart with -reindex or -reindex-chainstate to recover".
 
 Une fois copié, si besoin régler les droits d'accès utilisateur et groupe au user qui lance `bitcoind` et les permissions à `-rw-------` en effectuant :
 
@@ -1424,7 +1425,7 @@ Faire de même sur `indexes` si vous avez copié toutes les données de ce répe
 
 Démarrez le nœud et observez les logs, après certaines vérifications, si tout se passe bien, il va aller chercher les blocs manquants pour se synchroniser avec les autres pairs.
 
-Plus d'information sur les fichiers et répertoires du nœud bitcoin : [toute la doc](https://github.com/bitcoin/bitcoin/blob/master/doc/files.md) du "file system".
+Plus d'information sur les fichiers et répertoires du nœud Bitcoin : [toute la doc](https://github.com/bitcoin/bitcoin/blob/master/doc/files.md) du "file system".
 
 ### Nœud public / privé
 
@@ -1541,17 +1542,17 @@ Si nécessaire redémarrez le système par `sudo reboot`
 
 ### maj de bitcoind
 
-Ouvrir un terminal afin d'accéder au nœud puis afficher la version actuelle avec la commande `bitcoin-cli -version` . Ensuite consulter la page des [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), il est utile de lire les notes de la nouvelle version vers laquelle vous mettez à jour (et celles des versions que vous avez sautées) s'il y a des fonctionnalités / options qui vous intéressent ou que vous allez devoir gérer. Il est ici bon de préciser que l'on va toujours de l'avant, jamais en arrière. Ainsi si vous avez construit votre nœud avec bitcoin core v28.0 n'installez pas une v27.x car cela va mal se passer avec les données de blockchain.
+Ouvrir un terminal afin d'accéder au nœud puis afficher la version actuelle avec la commande `bitcoin-cli -version` . Ensuite consulter la page des [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), il est utile de lire les notes de la nouvelle version vers laquelle vous mettez à jour (et celles des versions que vous avez sautées) s'il y a des fonctionnalités / options qui vous intéressent ou que vous allez devoir gérer. Il est ici bon de préciser que l'on va toujours de l'avant, jamais en arrière. Ainsi si vous avez construit votre nœud avec Bitcoin Core v28.0 n'installez pas une v27.x car cela va mal se passer avec les données de blockchain.
 
-Si vous lisez la documentation concernant le cycle de vie de bitcoin core, vous constaterez qu'il est le suivant :
+Si vous lisez la documentation concernant le cycle de vie de Bitcoin Core, vous constaterez qu'il est le suivant :
 
 * 2 versions majeures par an
 * des versions mineures qui reportent d'importantes corrections de bogues des versions majeures récentes
 * les corrections de bogues ne seront reportées que sur les 18 derniers mois de version car cela nécessite trop de ressources de maintenance
 
-Ainsi, il n'est pas considéré comme sûr d'utiliser des versions de bitcoin core datant de plus de 18 mois, car elles peuvent contenir des vulnérabilités non corrigées. Si un nombre important de nœuds utilisent des logiciels très anciens et non corrigés, cela peut représenter un risque systémique pour le réseau.
+Ainsi, il n'est pas considéré comme sûr d'utiliser des versions de Bitcoin Core datant de plus de 18 mois, car elles peuvent contenir des vulnérabilités non corrigées. Si un nombre important de nœuds utilisent des logiciels très anciens et non corrigés, cela peut représenter un risque systémique pour le réseau.
 
-Un aspect fondamental du modèle de sécurité de bitcoin est que le logiciel du nœud n'est PAS mis à jour automatiquement. Les mises à jour automatiques créeraient un point de défaillance unique qui pourrait permettre à une mise à jour malveillante de se propager rapidement à une super-majorité de nœuds sur le réseau. 
+Un aspect fondamental du modèle de sécurité de Bitcoin est que le logiciel du nœud n'est PAS mis à jour automatiquement. Les mises à jour automatiques créeraient un point de défaillance unique qui pourrait permettre à une mise à jour malveillante de se propager rapidement à une super-majorité de nœuds sur le réseau. 
 
 Bon, tout cela est de la belle littérature, en définitive faites ce que bon vous semble, le joyeux bazar est aussi un modèle de sécurité. [Historique des mises à jour logicielles des nœuds.](https://blog.lopp.net/when-do-bitcoin-node-operators-upgrade/)
 
@@ -1710,7 +1711,7 @@ Rien de plus simple, si la fonctionnalité de mise à jour est disponible dans l
 
 Est un système de représentation efficace et compact de données binaires (base 2 qui utilise 0 et 1)  en une chaîne de caractères alphanumériques. Avec base 58 il faut définir 58 caractères différents, par convention est employé les chiffres de base 10 + l'alphabet majuscule + l'alphabet minuscule - les caractères ambigus `0 O l I`soit : `123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefjhijkmnopqrstuvwxyz`
 
-Base58 est utilisée pour les adresses bitcoin et les clés privées.
+Base58 est utilisée pour les adresses Bitcoin et les clés privées.
 
 La variante Base58Check inclut une somme de contrôle pour vérifier l'intégrité des données afin de prévenir les erreurs de saisie.
 
@@ -1724,7 +1725,7 @@ Afin d'améliorer les points faibles de base58 ([jeu de caractères et algorithm
 
 `123456789abcdefghjkmnpqrstuvwxyz` 
 
-Bech32 est utilisé pour les adresses bitcoin segwit native.
+Bech32 est utilisé pour les adresses Bitcoin segwit native.
 
 Exemple d'adresse : `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`
 
@@ -1732,13 +1733,13 @@ Exemple d'adresse : `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5
 
 Utilise les mêmes caractères que bech32 pour sa représentation mais sous une organisation différente qui [offre une meilleure sécurité que le schéma original de bech32](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki).
 
-Bech32m est utilisé pour les adresses bitcoin taproot.
+Bech32m est utilisé pour les adresses Bitcoin taproot.
 
 Exemple d'adresse : `bc1p0xlxvlhemja6c4dqv22uapctqupfhlxm9h8z3k2e72q4k9hcz7vqzk5jj0`
 
 ### BIP
 
-Une BIP (Bitcoin Improvement Proposal) est une proposition d'amélioration de bitcoin, cela se traduit par un document de conception fournissant des informations à la communauté bitcoin ou décrivant une nouvelle fonctionnalité pour bitcoin, ses processus ou son environnement. Liste des BIP [ici](https://github.com/bitcoin/bips) ou [là](https://bips.dev).
+Une BIP (Bitcoin Improvement Proposal) est une proposition d'amélioration de Bitcoin, cela se traduit par un document de conception fournissant des informations à la communauté ou décrivant une nouvelle fonctionnalité, ses processus ou son environnement. Liste des BIP [ici](https://github.com/bitcoin/bips) ou [là](https://bips.dev).
 
 ### BIP32 Root fingerprint
 
@@ -1754,7 +1755,7 @@ Est un service backend utilisé principalement par Trezor Suite pour fournir des
 
 ### Chemin de dérivation
 
-Les portefeuilles matériels ou logiciels modernes permettent de générer des clés et des adresses de manière hiérarchique et déterministe. Ils facilitent la gestion et l'organisation des adresses bitcoin pour différents usages ou comptes. A partir d'une simple phrase de récupération ils sont capables de gérer plusieurs portefeuilles avec des **chemins de dérivation** différents. La structure typique d'un chemin de dérivation est la suivante : `m/purpose/coin_type/account/change/address_index`
+Les portefeuilles matériels ou logiciels modernes permettent de générer des clés et des adresses de manière hiérarchique et déterministe. Ils facilitent la gestion et l'organisation des adresses Bitcoin pour différents usages ou comptes. A partir d'une simple phrase de récupération ils sont capables de gérer plusieurs portefeuilles avec des **chemins de dérivation** différents. La structure typique d'un chemin de dérivation est la suivante : `m/purpose/coin_type/account/change/address_index`
 
 * **m** → Master seed, c'est la clé maître, le point de départ de toutes les dérivations.
 * **purpose** → c'est le but, et informe sur la norme du chemin de dérivation. Venu avec la [BIP43](https://github.com/bitcoin/bips/blob/master/bip-0043.mediawiki)
@@ -1788,7 +1789,7 @@ Par exemple `m/44h/0h/0h/1/1` indique :
 
 Central Processor Unit (CPU), aussi appelé microprocesseur ou processeur central, est la puce responsable de l'exécution du code binaire produit par un compilateur à partir du code source d'un programme informatique. Le CPU est un circuit intégré généraliste à logique non câblée, ce qui signifie qu'il n'est pas spécialisé dans un domaine particulier et qu'il peut effectuer une grande variété de tâches. Cette polyvalence lui permet de "savoir tout faire", mais il n'est pas optimisé pour des opérations spécifiques.
 
-À l'opposé, les puces spécialisées à logique câblée, telles que les ASIC (Application Specific Integrated Circuit), sont conçues pour exécuter très rapidement un nombre restreint de tâches spécifiques. Par exemple, les ASIC destinés au minage de bitcoin sont spécialement conçus pour résoudre l'algorithme de hachage sécurisé SHA-256 (Secure Hash Algorithm-256), qui est l'algorithme utilisé dans le mécanisme de preuve de travail (Proof of Work) de bitcoin. Ces ASIC surpassent largement les CPU et même les GPU en termes d'efficacité et de vitesse pour le minage de bitcoin, ce qui les rend indispensables dans les opérations de minage à grande échelle.
+À l'opposé, les puces spécialisées à logique câblée, telles que les ASIC (Application Specific Integrated Circuit), sont conçues pour exécuter très rapidement un nombre restreint de tâches spécifiques. Par exemple, les ASIC destinés au minage de Bitcoin sont spécialement conçus pour résoudre l'algorithme de hachage sécurisé SHA-256 (Secure Hash Algorithm-256), qui est l'algorithme utilisé dans le mécanisme de preuve de travail (Proof of Work) de Bitcoin. Ces ASIC surpassent largement les CPU et même les GPU en termes d'efficacité et de vitesse pour le minage de Bitcoin, ce qui les rend indispensables dans les opérations de minage à grande échelle.
 
 ### GPG
 
@@ -1799,7 +1800,7 @@ GNU Privacy Guard est un logiciel open source de chiffrement et de signature num
 
 ### I2P
 
-S'intéresser à bitcoin permet de parfaire ses connaissances, avant je ne connaissais pas "Invisible Internet Project". C'est un réseau anonyme offrant une couche logicielle de type réseau overlay que les applications emploient pour envoyer de façon anonyme et sécurisée des informations entre elles. La communication est chiffrée de bout en bout.
+S'intéresser à Bitcoin permet de parfaire ses connaissances, avant je ne connaissais pas "Invisible Internet Project". C'est un réseau anonyme offrant une couche logicielle de type réseau overlay que les applications emploient pour envoyer de façon anonyme et sécurisée des informations entre elles. La communication est chiffrée de bout en bout.
 
 Au total, quatre couches de chiffrement sont utilisées pour envoyer un message. L'anonymat est assuré par le concept de « mix network », qui consiste à supprimer les connexions directes entre les pairs qui souhaitent échanger de l'information. À la place, le trafic passe par une série d'autres pairs de façon qu'un observateur ne puisse identifier ni l'expéditeur ni le destinataire de l'information. Chaque pair peut, à sa décharge, dire que les données ne lui étaient pas destinées, un déni plausible.
 
@@ -1811,7 +1812,7 @@ Contrairement à l'adressage IP, on ne peut pas désigner la machine propriétai
 
 ### PSBT
 
-Partially Signed Bitcoin Transactions. Une transaction bitcoin partiellement signée est un format de données qui permet aux portefeuilles et à d'autres outils d'échanger des informations sur une transaction bitcoin et les signatures nécessaires pour la finaliser. Une PSBT peut être créée en identifiant un ensemble d'UTXO à dépenser et un ensemble de sorties pour recevoir la valeur dépensée. Des informations sur chaque UTXO nécessaires pour générer une signature peuvent ensuite être ajoutées, éventuellement par un outil distinct, comme le script de l'UTXO ou sa valeur précise en bitcoin. La PSBT peut ensuite être copiée par n'importe quel moyen vers un programme capable de la signer. Pour les portefeuilles à plusieurs signatures ou dans les cas où différents portefeuilles contrôlent différentes entrées, cette dernière étape peut être répétée plusieurs fois par différents programmes sur différentes copies de la PSBT. Plusieurs PSBT comportant chacune une ou plusieurs signatures nécessaires peuvent être intégrées ultérieurement dans une PSBT unique. Enfin, cette PSBT entièrement signée peut être convertie en une transaction complète prête à être diffusée.
+Partially Signed Bitcoin Transactions. Une transaction Bitcoin partiellement signée est un format de données qui permet aux portefeuilles et à d'autres outils d'échanger des informations sur une transaction Bitcoin et les signatures nécessaires pour la finaliser. Une PSBT peut être créée en identifiant un ensemble d'UTXO à dépenser et un ensemble de sorties pour recevoir la valeur dépensée. Des informations sur chaque UTXO nécessaires pour générer une signature peuvent ensuite être ajoutées, éventuellement par un outil distinct, comme le script de l'UTXO ou sa valeur précise en bitcoin. La PSBT peut ensuite être copiée par n'importe quel moyen vers un programme capable de la signer. Pour les portefeuilles à plusieurs signatures ou dans les cas où différents portefeuilles contrôlent différentes entrées, cette dernière étape peut être répétée plusieurs fois par différents programmes sur différentes copies de la PSBT. Plusieurs PSBT comportant chacune une ou plusieurs signatures nécessaires peuvent être intégrées ultérieurement dans une PSBT unique. Enfin, cette PSBT entièrement signée peut être convertie en une transaction complète prête à être diffusée.
 
 ### Secure element et norme EAL
 
@@ -1836,7 +1837,7 @@ Simplified Payment Verification ou vérification simplifiée des paiements. Cett
 
 ### UTXO
 
-Unspent Transaction Output ou sortie de transaction non dépensé. Une transaction consomme un ou plusieurs UTXO existants comme entrée et crée de nouveaux UTXO comme sortie, le total des fonds entrants est toujours égal au total des fonds sortants y compris les frais de transaction.  Ce concept fondamental, *qui de fait est un déplacement des droits de propriété*, a été implémenté à la création de bitcoin. Exemple : vous possédez 1 BTC sur un seul UTXO et vous devez payer 0.5 BTC à un tiers. Votre transaction utilisera votre UTXO de 1 BTC comme entrée et créera trois nouvelles sorties : 0.5 BTC vers le tiers, 0.00001 BTC de frais de transaction, 0.49999 BTC de retour vers vous sur une de vos adresses de change. Vous avez maintenant un nouvel UTXO de 0.49999 BTC. Les entrées consomment un UTXO existant tandis que les sorties créent un nouvel UTXO, en résumé seuls les produits non dépensés peuvent être utilisés dans de nouvelles transactions, cela évite la double dépense et la fraude. En règle générale les portefeuilles gèrent les UTXO de manière transparente pour les utilisateurs selon différentes stratégies en fonction des choix implémentés par les développeurs du portefeuille logiciel.
+Unspent Transaction Output ou sortie de transaction non dépensé. Une transaction consomme un ou plusieurs UTXO existants comme entrée et crée de nouveaux UTXO comme sortie, le total des fonds entrants est toujours égal au total des fonds sortants y compris les frais de transaction.  Ce concept fondamental, *qui de fait est un déplacement des droits de propriété*, a été implémenté à la création de Bitcoin. Exemple : vous possédez 1 BTC sur un seul UTXO et vous devez payer 0.5 BTC à un tiers. Votre transaction utilisera votre UTXO de 1 BTC comme entrée et créera trois nouvelles sorties : 0.5 BTC vers le tiers, 0.00001 BTC de frais de transaction, 0.49999 BTC de retour vers vous sur une de vos adresses de change. Vous avez maintenant un nouvel UTXO de 0.49999 BTC. Les entrées consomment un UTXO existant tandis que les sorties créent un nouvel UTXO, en résumé seuls les produits non dépensés peuvent être utilisés dans de nouvelles transactions, cela évite la double dépense et la fraude. En règle générale les portefeuilles gèrent les UTXO de manière transparente pour les utilisateurs selon différentes stratégies en fonction des choix implémentés par les développeurs du portefeuille logiciel.
 
 Un "full node" possède l'historique de la totalité des UTXO dans son stockage local. A un moment donné l'ensemble des UTXO peut être additionné pour calculer l'offre totale en circulation,  la commande `bitcoin_cli gettxoutsetinfo` donne  19 817 079 BTC au 30-01-2025.
 
@@ -1860,13 +1861,13 @@ Un "full node" possède l'historique de la totalité des UTXO dans son stockage 
 
 * [BTC TouchPoint](https://btctouchpoint.com) - le parcours en vidéos et podcasts de la chute dans le bitcoin rabbit hole
 
-## Littérature libre de droits
+## Littérature
 
 [Livre "Mastering Bitcoin" traduction française incomplète qui a le mérite d'exister](https://bitcoin.fr/wp-content/uploads/2020/08/Mastering-Bitcoin.pdf)
 
-[Le livre blanc d'Ethereum en français contient des informations intéressantes … sur bitcoin](https://ethereum.org/fr/whitepaper/)
+[Le livre blanc d'Ethereum en français contient des informations intéressantes … sur Bitcoin](https://ethereum.org/fr/whitepaper/)
 
-[Thèse sur la gouvernance de Bitcoin de Maël Rolland](https://drive.google.com/file/d/1Y_S2qePNDcVLhBHiwZVnHJTQn9XpRp6_/view)
+[Le dictionnaire de Bitcoin par Loic … LA mine d'informations](https://github.com/LoicPandul/Dictionnaire-de-Bitcoin)
 
 
 ## Conclusion
@@ -1881,7 +1882,7 @@ We have proposed a system for electronic transactions without relying on trust. 
 Nous avons proposé un système de transactions électroniques qui ne repose pas sur la confiance. Nous avons commencé par le cadre habituel des pièces de monnaie fabriquées à partir de signatures numériques, qui permet un contrôle solide de la propriété, mais qui est incomplet s'il n'y a pas de moyen d'empêcher la double dépense. Pour résoudre cela, nous avons proposé un réseau pair à pair utilisant la preuve de travail pour enregistrer un historique public des transactions qui devient rapidement impossible à modifier pour un attaquant si les nœuds honnêtes contrôlent la majorité de la puissance CPU (¹). Le réseau est robuste dans sa simplicité non structurée. Les nœuds travaillent tous en même temps avec peu de coordination. Ils n'ont pas besoin d'être identifiés, puisque les messages ne sont pas acheminés vers un endroit particulier et qu'ils ne doivent être délivrés que dans la mesure du possible. Les nœuds peuvent quitter et rejoindre le réseau à volonté, en acceptant la chaîne de preuve de travail comme preuve de ce qui s'est passé pendant leur absence. Ils votent avec la puissance de leur CPU (¹), exprimant leur acceptation des blocs valides en travaillant à leur extension et leur rejet des blocs non valides en refusant de travailler dessus. Ce mécanisme de consensus permet d'appliquer toutes les règles et incitations nécessaires.
 
 
-(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un, le nœud fait le job que l'on connait et en plus il crée les nouveaux blocs, c'est le "nœud mineur". Depuis il y a eu spécialisation des rôles. Le "mineur", équipé de ses ASICs infiniment plus véloces que les CPU, a quitté le nœud (²) aux alentours de 2013 \~ 2014.  Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds mineurs.
+(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un, le nœud fait le job que l'on connait et en plus il crée les nouveaux blocs, c'est le "nœud mineur". Depuis il y a eu spécialisation des rôles. Le "mineur", équipé de ses ASICs infiniment plus véloces que les CPU, a quitté le nœud (²) aux alentours de 2013 \~ 2014.  Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds mineurs.
 
 
 Q'engendre cette séparation au point de vue des pouvoirs ?
