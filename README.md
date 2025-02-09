@@ -59,7 +59,7 @@ Dell Optiplex 5050 SFF
 * Connecté au réseau par RJ45
 * Operating System sur SSD sata 240 Go
 * Données blockchain sur NVMe.M2 de 2 To (le connecteur M2 2280 est sur la carte mère)
-* Debian PC 64 bits installée  "console-only"
+* Debian GNU/Linux PC 64 bits installée  "console-only"
 * Consommation 11.2 watts / heure (en situation sur une moyenne de 15 jours)
 * Alimentation secourue : onduleur. Si l'onduleur est capable de dialoguer avec le PC, vous avez  upsmon pour arrêter le système proprement en cas de coupure prolongée. Et puis oui les onduleurs c'est pénible et coûteux dans le temps. Soit on change les batteries au plomb tous les 4 à 5 ans, soit on s'aperçoit qu'il faut changer la batterie lorsque y a une coupure puisque l'onduleur n'a pas fait son boulot et que le système s'est arrêté en vrac ! Suivant le camp ou vous situez ne mettez pas d'onduleur … ou bien regardez du côté des stations d'énergie à batterie LiFePO4 dont la durée de vie est en principe > 10 ans.
 
@@ -160,7 +160,7 @@ sudo apt-get install libzmq3-dev
 
 Voir les versions des librairies installées `apt show nom_de_la_librarie-dev`
 
-Si besoin de dé-installer une librairie, c'est `sudo apt-get remove nom_de_la_librarie-dev`
+Si besoin de dé-installer une librairie, c'est `sudo apt-get remove nom_de_la_librarie`
 
 Faire le ménage après des suppressions de paquets `sudo apt-get autoremove`
 
@@ -170,7 +170,7 @@ La dépendance à la base de données Berkeley ne se pose plus, depuis la versio
 
 D'après ce que l'on sait, durant les années 2007 à 2008 une (ou des) personne(s) a pondu pas mal de lignes de code C++, puis les a lâchées dans le cyber-espace en 2009, un outil fonctionnel et potentiellement révolutionnaire est né. [Au fil du temps le code est ré-écrit](https://bitcoin.fr/au-coeur-du-code/), fiabilisé et amélioré par une équipe connue depuis 2010 \~ 2011 sous le nom de "core developers". Cela peut paraître perturbant mais tout code informatique doit être amélioré, fiabilisé et sécurisé. L'idée de départ parait parfaite mais sa transcription exacte en code informatique est très délicate, le résultat est donc surement qualifiable d'imparfait. Qui plus est : le 3 janvier 2009 le jour du bloc genesis, le comité était réduit à une poignée d'individus voire moins, face à des milliers de lignes de code Open Source mettant en oeuvre un concept jusque-là jamais atteint, une équipe sera ensuite bien plus forte qu'un ou quelques individus. Plus le temps passe et plus nous pouvons dire que cela se rapproche de la perfection ***à condition*** que l'équipe en charge du code conserve l'idéologie et la philosophie initiale. A souligner également, l'environnement autour de Bitcoin n'est pas figé, il peut changer ou évoluer. Ici également il faudra que les "core developers" effectuent ce qu'il faut. En tant qu'individu et gardien du registre distribué vous ferez respecter le consensus, face au code vous avez votre mot à dire, vous pouvez le choisir, avoir le choix est important et primordial, c'est le fondement même de toute véritable démocratie. Votre voix compte 1:1 comme tous les autres, ici la gouvernance s'opère par démocratie directe avec un modèle de décision strictement horizontal. Si l'époque le demande, renseignez vous, puis choisissez, ensuite vous allez mettre en oeuvre le processus de compilation de 80K lignes de C++ qu'est devenu Bitcoin et obtenir un binaire spécialement conçu pour s'exécuter sur votre machine.
 
-Pour choisir la version que vous souhaitez construire, faites `git -C ~/code/bitcoin tag`\n ou allez voir les [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), en octobre 2024 nous sommes loin de la "Guerre des blocs" de 2015 à 2017, la période est apparemment calme et sereine, donc se limiter à deux choix me semble raisonnable, cela donne :
+Pour choisir la version que vous souhaitez construire, faites `git -C ~/code/bitcoin tag` ou allez voir les [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), en octobre 2024 nous sommes loin de la "Guerre des blocs" de 2015 à 2017, la période est apparemment calme et sereine, donc se limiter à deux choix me semble raisonnable, cela donne :
 
 * 'v28.0' pour la dernière "final" qui intègre des améliorations et des correctifs.
 * 'v27.1' l'avant-dernière "final", contient des correctifs pour l'essentiel.
@@ -186,7 +186,9 @@ git checkout tags/v28.0
 ./configure --disable-tests --disable-fuzz-binary --disable-bench
 ```
 
-Relancer `.configure` tant que vous n'obtenez pas ce que vous désirez, pour de l'aide faites `./configure --help` ou `./configure --help | grep -A1 "je cherche ce terme"`\nRésultat que j'obtient :
+Relancer `.configure` tant que vous n'obtenez pas ce que vous désirez, pour de l'aide faites `./configure --help` ou `./configure --help | grep -A1 "je cherche ce terme"`
+
+Résultat que j'obtient :
 
 ```ini
 Options used to compile and link:
@@ -333,15 +335,20 @@ UsePAM no
 
 \[PC\] vérifier qu'il est impossible de se connecter à \[bitcoin\]
 
-\[PC\] Déplacer les clés dans '\~/.ssh' par :\n`mv ~/id_rsa.pub ~/.ssh/id_rsa.pub`
+\[PC\] Déplacer les clés dans `~/.ssh` par :
 
-`mv ~/id_rsa ~/.ssh/id_rsa`
+```bash
+mv ~/id_rsa.pub ~/.ssh/id_rsa.pub
+mv ~/id_rsa ~/.ssh/id_rsa
+```
 
 \[PC\] se re-connecter à \[bitcoin\] par `ssh username@IP`, cela doit fonctionner sans mot de passe.
 
 En cas d'échec vous avez toujours accès à \[bitcoin\] par l'ouverture de la première session pour remédier au problème ... Si c'est OK, fermer tous les terminaux par 'exit'.
 
-\[PC\] S'il est nécessaire d'effacer un "host" en particulier dans `.ssh/known_hosts`, la commande est : `ssh-keygen -R <hostname>` , `hostname` désigne une IP ou un nom de machine sur le réseau local.\n\[PC\] si vous devez accéder par ssh à plus d'un hôte avec cette méthode, il faudra définir un fichier `config` dans le répertoire `~/.ssh` avec la description de chaque hôte.
+\[PC\] S'il est nécessaire d'effacer un "host" en particulier dans `.ssh/known_hosts`, la commande est : `ssh-keygen -R <hostname>` , `hostname` désigne une IP ou un nom de machine sur le réseau local.
+
+\[PC\] si vous devez accéder par ssh à plus d'un hôte avec cette méthode, il faudra définir un fichier `config` dans le répertoire `~/.ssh` avec la description de chaque hôte.
 
 
 ### Séparer les données Bitcoin de l'OS
@@ -406,7 +413,7 @@ ln -s /mnt/nvme/bitcoin ~/.bitcoin
 
 ### **Paramétrage de Bitcoin Core**
 
-`bitcoin.conf` est le fichier de configuration de `bitcoind` le logiciel "nœud bitcoin".
+`bitcoin.conf` est le fichier de configuration de `bitcoind` le logiciel nœud Bitcoin.
 
 `bitcoind` (d à la fin pour "daemon", un démon logiciel est un processus qui tourne en arrière plan) lancé sans fichier de configuration fonctionne très bien. Pour l'arrêter tapez "CTRL-C" quand il n'est pas explicitement lancé en mode démon. S'il est en mode démon utiliser le programme `bitcoin-cli`  (acronyme de Bitcoin Command Line Interface) qui communique avec lui, pour arrêter le démon c'est `bitcoin-cli stop`
 
@@ -734,7 +741,7 @@ Démarrer le service `sudo systemctl start bitcoin.service` et attendre le retou
 
 Vérifier que le service fonctionne correctement `sudo systemctl status bitcoin.service`
 
-Tout en observant les logs dans un terminal, lancez sur un autre `sudo reboot` vous devez voir `Shutdown: done` dans les logs juste avant que la machine s'arrête, cela signifie que le nœud a stoppé proprement. Démarrez la machine, `bitcoind` doit se lancer automatiquement.\nBien sur, si le service est actif ne plus utiliser`bitcoin-cli stop,`dorénavant pour l'arrêter faire :
+Tout en observant les logs dans un terminal, lancez sur un autre `sudo reboot` vous devez voir `Shutdown: done` dans les logs juste avant que la machine s'arrête, cela signifie que le nœud a stoppé proprement. Démarrez la machine, `bitcoind` doit se lancer automatiquement. Bien sur, si le service est actif ne plus utiliser`bitcoin-cli stop,`dorénavant pour l'arrêter faire :
 
  `sudo systemctl stop bitcoin.service` 
 
@@ -884,7 +891,7 @@ Comme pour Bitcoin il est souhaitable de séparer les données `electrs` de l'Op
 mkdir /mnt/nvme/electrs
 
 # Créez le lien
-ln -s /mnt/nvme/electrs ~/.electrs
+ln -s /mnt/nvme/electrs ~/.e*lectrs
 ```
 
 ### Configuration d'Electrs
@@ -1016,7 +1023,7 @@ Démarrer le service `sudo systemctl start electrs.service`
 
 Vérifier que le service fonctionne correctement`sudo systemctl status electrs.service`
 
-Observer les logs dans le terminal, c'est synchronisé avec le dernier bloc, tout est ok ? oui, alors lancez `sudo reboot` vous devez voir `Stopped electrs.service - Electrs` dans les logs juste avant que la machine s'arrête, cela signifie que `electrs` a stoppé proprement. Au redémarrage de la machine, `bitcoind` doit se lancer automatiquement suivi par `electr`.\nPour l'arrêter, par exemple pour une mise à jour de `electrs.toml` faire :
+Observer les logs dans le terminal, c'est synchronisé avec le dernier bloc, tout est ok ? oui, alors lancez `sudo reboot` vous devez voir `Stopped electrs.service - Electrs` dans les logs juste avant que la machine s'arrête, cela signifie que `electrs` a stoppé proprement. Au redémarrage de la machine, `bitcoind` doit se lancer automatiquement suivi par `electr`. Pour l'arrêter, par exemple pour une mise à jour de `electrs.toml` faire :
 
 `sudo systemctl stop electrs.service`
 
@@ -1024,7 +1031,7 @@ Notez qu'en effectuant de l'exploration didactique avec Electrum sur des portefe
 
 
 1. Lancez `sudo systemctl stop electrs.service` , ensuite il est nécessaire d'attendre patiemment 5mn pour retrouver la main, c'est le temps du `TimeoutSec=300` paramétré dans le fichier `electrs.service` , relancez ensuite le service.
-2. Ne faites rien et généralement en moins de 10mn quand vous verrez dans les logs `disconnecting due to failed to send response` le serveur `electrs` sera de nouveau opérationnel.\n
+2. Ne faites rien et généralement en moins de 10mn quand vous verrez dans les logs `disconnecting due to failed to send response` le serveur `electrs` sera de nouveau opérationnel.
 
 
 ### Chiffrer la connexion
@@ -1211,7 +1218,7 @@ est la dernière évolution importante du protocole, il a été introduit par 3 
 * BIP341 : mise à jour Taproot. En n'exposant que les détails de la transaction exécutée, Taproot offre une plus grande confidentialité aux utilisateurs. En effet les informations de transactions non exécutées, qui peuvent contenir des informations privées sensibles, ne sont plus enregistrées sur la blockchain.
 * BIP342 : introduit Tapscript, cela dote Bitcoin d'un langage de programmation de transactions amélioré, axé sur la technologie Schnorr et Taproot. Permet des scripts de transactions plus flexibles et puissants.
 
-Taproot a introduit des fonctionnalités avancées comme les contrats intelligents, il permet également d'optimiser l'espace dans les blocs. Pour information la taille maximale des blocs est limité à 4 Mo depuis l'implémentation de Segregated Witness (SegWit) d'août 2017, ne l'oublions pas à l'origine c'était 1 Mo. La blockchain augmente immuablement de 144 blocs par jour et de 52560 par an, [la taille des blocs est variable et fonction de l'activité, de l'usage](https://www.blockchain.com/fr/explorer/charts/blocks-size). D'avril 2023 à avril 2024 la taille moyenne d'un bloc est de 1.75Mo, si je prends 2 Mo par bloc cela donne 103 Go de + par an. Mon NVMe.M2 de 2 To sera approximativement blindé en 2036, dans 12 ans. Les capacités et les vitesses de transfert des stockages de masse n'aurons de cesse de s'améliorer dans le futur, il est envisageable que le code de Bitcoin s'adaptera à nouveau.
+Taproot a introduit des fonctionnalités avancées comme les contrats intelligents, il permet également d'optimiser l'espace dans les blocs. Pour information la taille maximale des blocs est limité à 4 Mo depuis l'implémentation de Segregated Witness (SegWit) d'août 2017, ne pas oublier qu'à l'origine c'était 1 Mo. La blockchain augmente immuablement de 144 blocs par jour et de 52560 par an, [la taille des blocs est variable et fonction de l'activité, de l'usage](https://www.blockchain.com/fr/explorer/charts/blocks-size). D'avril 2023 à avril 2024 la taille moyenne d'un bloc est de 1.75Mo, si je prends 2 Mo par bloc cela donne 103 Go de + par an. Mon NVMe.M2 de 2 To sera approximativement blindé en 2036, dans 12 ans. Les capacités et les vitesses de transfert des stockages de masse n'aurons de cesse de s'améliorer dans le futur, il est envisageable que le code de Bitcoin s'adaptera à nouveau.
 
 Revenons à Taproot, ces fonctionnalités supplémentaires facilitent ou permettent de nouvelles choses, comme par exemple l'introduction des Ordinals en optimisant la capacité de stockage des blocs et en simplifiant le stockage de données arbitraires. Les Ordinals sont un protocole qui permet d'inscrire des données (comme des images, des textes ou des vidéos) directement sur des satoshis individuels dans la blockchain. Ainsi un satoshi peut devenir un actif numérique unique, similaire à un NFT (Non-Fungible Token). 
 
@@ -1502,7 +1509,7 @@ Bien que tout soit réalisable avec `bitcoin-cli` en ligne de commande,  ici j'u
 
 (équivalent de `bitcoin-cli createwallet "Test/miner_wallet" true false false ""` )
 
-Un chemin est présent dans le nom, ce portefeuille sera dans `~/.bitcoin/Test/miner_wallet`\n
+Un chemin est présent dans le nom, ce portefeuille sera dans `~/.bitcoin/Test/miner_wallet`
 
 Ensuite dans "Window / Console", saisir :
 
@@ -1871,7 +1878,6 @@ Un "full node" possède l'historique de la totalité des UTXO dans son stockage 
 [Le dictionnaire de Bitcoin par Loic … LA mine d'informations](https://github.com/LoicPandul/Dictionnaire-de-Bitcoin)
 
 
-\
 ## Conclusion
 
 ### of Satoshi Nakamoto's paper
