@@ -290,15 +290,15 @@ CJDNS est une autre solution d'anonymisation supportée par Bitcoin Core, sa mis
 
 ### **SSH et la sécurité**
 
-Votre futur nœud \[bitcoin\] est connecté à l'extérieur 7j/7, les mots de passe ne sont pas d'une sécurité absolue et sont pénibles à l'usage. Pour se passer du mot de passe et améliorer la sécurité installez une clé d'authentification sur le ou les postes clients de votre réseau local devant avoir un accès Secure Shell (ssh) à votre nœud.
+Votre futur nœud \[Bitcoin\] est connecté à l'extérieur 7j/7, les mots de passe ne sont pas d'une sécurité absolue et sont pénibles à l'usage. Pour se passer du mot de passe et améliorer la sécurité installez une clé d'authentification sur le ou les postes clients de votre réseau local devant avoir un accès Secure Shell (ssh) à votre nœud.
 
 \[PC\] désigne le poste client (pour moi c'est Manjaro Linux)
 
 \[PC\] lancer un terminal et ouvrir une session sur votre nœud par `ssh username@IP`
 
-\[bitcoin\] si le répertoire `.ssh` est non présent enchaîner `mkdir ~/.ssh` puis `chmod 700 ~/.ssh`
+\[Bitcoin\] si le répertoire `.ssh` est non présent enchaîner `mkdir ~/.ssh` puis `chmod 700 ~/.ssh`
 
-\[bitcoin\] saisir : `nano ~/.ssh/authorized_keys` et laissez ouvert.
+\[Bitcoin\] saisir : `nano ~/.ssh/authorized_keys` et laissez ouvert.
 
 \[PC\] ouvrir un 2ème terminal pour générer des clés par `ssh-keygen -t rsa`
 
@@ -311,9 +311,9 @@ Votre futur nœud \[bitcoin\] est connecté à l'extérieur 7j/7, les mots de pa
 
 *Tip : pour copier coller du texte d'un terminal Linux à un autre terminal Linux, sélectionnez le simplement à la souris dans le 1er, positionnez le curseur de la souris dans le 2ème puis faites un click molette.*
 
-\[bitcoin\] coller le contenu dans `~/.ssh/authorized_keys` précédemment ouvert, enregistrer, quitter nano, faire `chmod 600 ~/.ssh/authorized_keys`. Ne pas fermer la session.
+\[Bitcoin\] coller le contenu dans `~/.ssh/authorized_keys` précédemment ouvert, enregistrer, quitter nano, faire `chmod 600 ~/.ssh/authorized_keys`. Ne pas fermer la session.
 
-\[bitcoin\] Faites :  `sudo nano /etc/ssh/sshd_config` 
+\[Bitcoin\] Faites :  `sudo nano /etc/ssh/sshd_config` 
 
 Lisez puis rajoutez ceci à la fin du fichier de configuration de ssh
 
@@ -327,9 +327,9 @@ PasswordAuthentication no
 UsePAM no
 ```
 
-\[bitcoin\] sauvegarder et quitter l'éditeur nano, toujours laisser la session ouverte.
+\[Bitcoin\] sauvegarder et quitter l'éditeur nano, toujours laisser la session ouverte.
 
-\[bitcoin\] redémarrer le service ssh par  `sudo service ssh reload`
+\[Bitcoin\] redémarrer le service ssh par  `sudo service ssh reload`
 
 \[PC\] ouvrir un nouveau terminal pour se connecter à \[bitcoin\] par  `ssh username@IP` 
 
@@ -891,7 +891,7 @@ Comme pour Bitcoin il est souhaitable de séparer les données `electrs` de l'Op
 mkdir /mnt/nvme/electrs
 
 # Créez le lien
-ln -s /mnt/nvme/electrs ~/.e*lectrs
+ln -s /mnt/nvme/electrs ~/.electrs
 ```
 
 ### Configuration d'Electrs
