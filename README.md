@@ -13,7 +13,7 @@ Afin d'éviter toute déconvenue il est souhaitable de commencez par là.
 * Mémoire vive 8 Go (minimum 4Go)
 * Mémoire de masse 2 To de type SSD ou NVMe
 * Interface réseau filaire type RJ45 reliée à internet et à votre réseau local.
-* Système d'exploitation : la distribution Debian par exemple convient très bien.
+* Système d'exploitation : Open Source
 * Installation et administration par accès ssh (interface en ligne de commande)
 
 dans les détails
@@ -1890,29 +1890,34 @@ We have proposed a system for electronic transactions without relying on trust. 
 Nous avons proposé un système de transactions électroniques qui ne repose pas sur la confiance. Nous avons commencé par le cadre habituel des pièces de monnaie fabriquées à partir de signatures numériques, qui permet un contrôle solide de la propriété, mais qui est incomplet s'il n'y a pas de moyen d'empêcher la double dépense. Pour résoudre cela, nous avons proposé un réseau pair à pair utilisant la preuve de travail pour enregistrer un historique public des transactions qui devient rapidement impossible à modifier pour un attaquant si les nœuds honnêtes contrôlent la majorité de la puissance CPU (¹). Le réseau est robuste dans sa simplicité non structurée. Les nœuds travaillent tous en même temps avec peu de coordination. Ils n'ont pas besoin d'être identifiés, puisque les messages ne sont pas acheminés vers un endroit particulier et qu'ils ne doivent être délivrés que dans la mesure du possible. Les nœuds peuvent quitter et rejoindre le réseau à volonté, en acceptant la chaîne de preuve de travail comme preuve de ce qui s'est passé pendant leur absence. Ils votent avec la puissance de leur CPU (¹), exprimant leur acceptation des blocs valides en travaillant à leur extension et leur rejet des blocs non valides en refusant de travailler dessus. Ce mécanisme de consensus permet d'appliquer toutes les règles et incitations nécessaires.
 
 
-(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un, le nœud fait le job que l'on connait et en plus il crée les nouveaux blocs, c'est le "nœud mineur". Depuis il y a eu spécialisation des rôles. Le "mineur", équipé de ses ASICs infiniment plus véloces que les CPU, a quitté le nœud (²) aux alentours de 2013 \~ 2014.  Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds mineurs.
+(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un où le nœud utilisait la puissance de traitement de son CPU pour la preuve de travail. Depuis 2013 \~ 2014 cette preuve de travail (ou minage) indispensable pour la création des nouveaux blocs est devenu une activité industrielle nécessitant des investissements colossaux et hors de portée de l'individu. Dans la pratique c'est juste la puissance de traitement SHA256 qui s'est externalisé et professionnalisée. En simplifiant, pour avoir une chance raisonnable de créer de nouveaux blocs un nœud (²) Bitcoin Core doit déléguer (³) et utiliser la puissance de calcul de milliers l'ASICs parfois eux mêmes groupés dans des pools de minage.
+
+Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds qui minent les nouveaux blocs.
+
+(²)  Le minage CPU via `bitcoind` n'est plus supporté depuis `bitcoin core 0.13.0` sorti en 2016.
+
+(³) je suis en train de tester cette délégation par Stratum, je reviens plus tard ici …
 
 
-Q'engendre cette séparation au point de vue des pouvoirs ?
+Q'engendre cette professionnalisation de la puissance de calcul dans les pouvoirs ?
 
-Les nœuds
+**Les nœuds** (ne créant pas de nouveaux blocs)
 
 * Sont les gardiens de toutes les transactions passées avec l'enchaînement de tous les blocs
 * Valident ou invalident les transactions ou les blocs qui leur sont proposés
 * Propagent les transactions et les blocs
-* Assurent la collecte, la validité et la mise à disposition des nouvelles transactions 
+* Assurent la collecte, la validité et la diffusion des nouvelles transactions 
 * Appliquent les règles du consensus
 
-Les mineurs
+**Les mineurs** (nœuds + fermes d'ASICs capables de créer des nouveaux blocs)
 
-* Sélectionnent les transactions en attente
-* Ajoutent aux blocs les transactions qu'ils ont choisi
+* Sont également des nœuds avec tout ce qui les caractérise
+* Sélectionnent les transactions en attente et les ajoutent au bloc
 * Créent les nouveaux blocs en résolvant l'algorithme de preuve de travail
 * Proposent les nouveaux blocs
 * Sont les percepteurs de l'inflation programmée avec la récompense de bloc jusqu'en 2140
 * Sont les percepteurs des frais de transaction
 
-En admettant que ce que j'ai écrit est suffisamment vrai et exhaustif, l'on pourrait en déduire que les mineurs proposent et les nœuds disposent. Cependant la réalité doit être plus subtile que cela, les mineurs proposent sous contrainte des nœuds et les nœuds valident avec des règles ce que les mineurs leur soumettent. L'interdépendance réelle entre nœuds et mineurs est bien palpable. Tu me tiens et je te tiens, c'est mieux comme ça, non ? *Cela tend à éloigner dérives et dérapages de la nature humaine.*
+En admettant que ce que j'ai écrit est suffisamment vrai et exhaustif, l'on pourrait en déduire que les mineurs proposent et les nœuds disposent. Cependant la réalité doit être plus subtile que cela, les mineurs proposent sous contrainte des nœuds et les nœuds valident avec des règles ce que les mineurs leur soumettent ?
 
-
-(²)  Le minage CPU via `bitcoind` n'est plus supporté depuis `bitcoin core 0.13.0` sorti en 2016.
+*J'essaye, mais en fait je suis sur de rien !  Ce que je sais : pour que cela tienne il est souhaitable de s'éloigner des dérives et dérapages de la nature humaine.*
