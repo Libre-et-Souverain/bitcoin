@@ -45,9 +45,9 @@ Raspberry Pi 5
 
 (¹) pourquoi un seul périphérique de stockage :
 
-* le boot sur la sd-card est un poison dans le temps, à éviter !
+* la sd-card est un poison dans le temps pour le système d'exploitation, à éviter absolument !
 * jusqu'à présent il est impossible de booter sur NVME si plus d'un sur la carte d'extension, à vérifier dans le temps bien sûr. 
-* booter sur usb est nul vu le concept de cette machine, autant passer sur une machine plus classique et parfois moins chère si acquise d'occasion.
+* booter sur usb est nul vu le concept de cette mini-machine, autant passer sur un système plus classique et parfois moins cher si acquis d'occasion.
 
 
 ### Machine classique
@@ -1890,18 +1890,18 @@ We have proposed a system for electronic transactions without relying on trust. 
 Nous avons proposé un système de transactions électroniques qui ne repose pas sur la confiance. Nous avons commencé par le cadre habituel des pièces de monnaie fabriquées à partir de signatures numériques, qui permet un contrôle solide de la propriété, mais qui est incomplet s'il n'y a pas de moyen d'empêcher la double dépense. Pour résoudre cela, nous avons proposé un réseau pair à pair utilisant la preuve de travail pour enregistrer un historique public des transactions qui devient rapidement impossible à modifier pour un attaquant si les nœuds honnêtes contrôlent la majorité de la puissance CPU (¹). Le réseau est robuste dans sa simplicité non structurée. Les nœuds travaillent tous en même temps avec peu de coordination. Ils n'ont pas besoin d'être identifiés, puisque les messages ne sont pas acheminés vers un endroit particulier et qu'ils ne doivent être délivrés que dans la mesure du possible. Les nœuds peuvent quitter et rejoindre le réseau à volonté, en acceptant la chaîne de preuve de travail comme preuve de ce qui s'est passé pendant leur absence. Ils votent avec la puissance de leur CPU (¹), exprimant leur acceptation des blocs valides en travaillant à leur extension et leur rejet des blocs non valides en refusant de travailler dessus. Ce mécanisme de consensus permet d'appliquer toutes les règles et incitations nécessaires.
 
 
-(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un où le nœud utilisait la puissance de traitement de son CPU pour la preuve de travail. Depuis 2013 \~ 2014 cette preuve de travail (ou minage) indispensable pour la création des nouveaux blocs est devenu une activité industrielle nécessitant des investissements colossaux et hors de portée de l'individu. Dans la pratique c'est juste la puissance de traitement SHA256 qui s'est externalisé et professionnalisée. En simplifiant, pour avoir une chance raisonnable de créer de nouveaux blocs un nœud (²) Bitcoin Core doit déléguer (³) et utiliser la puissance de calcul de milliers l'ASICs parfois eux mêmes groupés dans des pools de minage.
+(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un où le nœud utilise la puissance de traitement de son CPU (²) pour la création des nouveaux blocs avec la preuve de travail. Depuis 2013 \~ 2014 cette preuve de travail (Proof of Work), *qui est la base du consensus*,  est devenu une activité industrielle nécessitant des investissements colossaux et donc hors de portée de l'individu. Le hashrate, qui quantifie cette puissance de traitement SHA256 disponible sur le réseau Bitcoin, s'est externalisé et professionnalisé.  Autrement dit, pour avoir une chance raisonnable de créer de nouveaux blocs, un nœud Bitcoin doit déléguer (³) et utiliser la puissance de calcul de milliers de puces spécialisées appelées ASIC qui sont groupées dans ce que l'on nomme des pools de minage.
 
 Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds qui minent les nouveaux blocs.
 
 (²)  Le minage CPU via `bitcoind` n'est plus supporté depuis `bitcoin core 0.13.0` sorti en 2016.
 
-(³) je suis en train de tester cette délégation par Stratum, je reviens plus tard ici …
+(³) cette délégation s'effectue par Stratum, un protocole de communication qui sert d'intermédiaire entre les ASIC spécialisés SHA256 et le nœud Bitcoin. Stratum permet d'agréger la puissance de calcul du minage en pool avec optimisation de la charge et de la latence réseau. En simplifiant : Stratum coordonne les pools de mineurs et procure au nœud Bitcoin la faculté de créer de nouveau blocs.
 
 
-Q'engendre cette professionnalisation de la puissance de calcul dans les pouvoirs ?
+### Q'engendre la professionnalisation de la puissance de calcul dans la gouvernance de Bitcoin ?
 
-**Les nœuds** (ne créant pas de nouveaux blocs)
+**Les nœuds** (les individus → nœuds ne créant pas de nouveaux blocs)
 
 * Sont les gardiens de toutes les transactions passées avec l'enchaînement de tous les blocs
 * Valident ou invalident les transactions ou les blocs qui leur sont proposés
@@ -1909,7 +1909,7 @@ Q'engendre cette professionnalisation de la puissance de calcul dans les pouvoir
 * Assurent la collecte, la validité et la diffusion des nouvelles transactions 
 * Appliquent les règles du consensus
 
-**Les mineurs** (nœuds + fermes d'ASICs capables de créer des nouveaux blocs)
+**Les mineurs** (les industriels → nœuds + fermes d'ASIC créant des nouveaux blocs)
 
 * Sont également des nœuds avec tout ce qui les caractérise
 * Sélectionnent les transactions en attente et les ajoutent au bloc
@@ -1918,6 +1918,15 @@ Q'engendre cette professionnalisation de la puissance de calcul dans les pouvoir
 * Sont les percepteurs de l'inflation programmée avec la récompense de bloc jusqu'en 2140
 * Sont les percepteurs des frais de transaction
 
-En admettant que ce que j'ai écrit est suffisamment vrai et exhaustif, l'on pourrait en déduire que les mineurs proposent et les nœuds disposent. Cependant la réalité doit être plus subtile que cela, les mineurs proposent sous contrainte des nœuds et les nœuds valident avec des règles ce que les mineurs leur soumettent ?
+En admettant que ce que j'ai écrit est suffisamment vrai et exhaustif, l'on pourrait en déduire que les mineurs proposent et les nœuds disposent. Cependant la réalité doit être bien plus subtile que cela : les mineurs proposent sous contrainte des nœuds et les nœuds valident avec des règles ce que les mineurs leur soumettent ? Ensuite il y a un critère important, celui de la répartition :
 
-*J'essaye, mais en fait je suis sur de rien !  Ce que je sais : pour que cela tienne il est souhaitable de s'éloigner des dérives et dérapages de la nature humaine.*
+* du nombre de nœuds et de mineurs
+* de la puissance de calcul entre les différents acteurs industriels du minage
+* géographique des nœuds et des mineurs
+
+Réponse : *j'essaie de la trouver … mais en fait j'en sait rien !* Et puis quand je regarde la courbe à tendance parabolique du [hashrate](https://www.coinwarz.com/mining/bitcoin/hashrate-chart) dans le temps, les "incentives" dont parle Satoshi Nakamoto fonctionnent à plein régime. Au fait la commande c'est `bitcoin-cli getnetworkhashps`
+
+
+### Ma conclusion
+
+Faites donc tourner un nœud, le vôtre, et existez en tant qu'individu !
