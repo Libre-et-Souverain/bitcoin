@@ -5,7 +5,7 @@
 
 ## Matériel dédié
 
-Afin d'éviter toute déconvenue il est souhaitable de commencez par là.
+Afin d'éviter toute déconvenue il est souhaitable de commencer par là.
 
 ### Requis machine de base
 
@@ -123,7 +123,7 @@ sysbench memory run
 
 Le débit indiqué ici est à rapprocher de la première ligne de la performance du stockage de masse, les chiffres doivent être approximativement similaires. 
 
-## Logiciel Bitcoin core
+## Logiciel Bitcoin Core
 
 ### **Mettre à jour le système d'exploitation**
 
@@ -158,7 +158,7 @@ sudo apt-get install libminiupnpc-dev
 sudo apt-get install libzmq3-dev
 ```
 
-Voir les versions des librairies installées `apt show nom_de_la_librarie-dev`
+Voir les versions des librairies installées `apt show nom_de_la_librarie`
 
 Si besoin de dé-installer une librairie, c'est `sudo apt-get remove nom_de_la_librarie`
 
@@ -166,11 +166,11 @@ Faire le ménage après des suppressions de paquets `sudo apt-get autoremove`
 
 La dépendance à la base de données Berkeley ne se pose plus, depuis la version 0.21 Bitcoin utilise la base de données SQLite. 
 
-### Compiler Bitcoin core
+### Compiler Bitcoin Core
 
 D'après ce que l'on sait, durant les années 2007 à 2008 une (ou des) personne(s) a pondu pas mal de lignes de code C++, puis les a lâchées dans le cyber-espace en 2009, un outil fonctionnel et potentiellement révolutionnaire est né. [Au fil du temps le code est ré-écrit](https://bitcoin.fr/au-coeur-du-code/), fiabilisé et amélioré par une équipe connue depuis 2010 \~ 2011 sous le nom de "core developers". Cela peut paraître perturbant mais tout code informatique doit être amélioré, fiabilisé et sécurisé. L'idée de départ parait parfaite mais sa transcription exacte en code informatique est très délicate, le résultat est donc surement qualifiable d'imparfait. Qui plus est : le 3 janvier 2009 le jour du bloc genesis, le comité était réduit à une poignée d'individus voire moins, face à des milliers de lignes de code Open Source mettant en oeuvre un concept jusque-là jamais atteint, une équipe sera ensuite bien plus forte qu'un ou quelques individus. Plus le temps passe et plus nous pouvons dire que cela se rapproche de la perfection ***à condition*** que l'équipe en charge du code conserve l'idéologie et la philosophie initiale. A souligner également, l'environnement autour de Bitcoin n'est pas figé, il peut changer ou évoluer. Ici également il faudra que les "core developers" effectuent ce qu'il faut. En tant qu'individu et gardien du registre distribué vous ferez respecter le consensus, face au code vous avez votre mot à dire, vous pouvez le choisir, avoir le choix est important et primordial, c'est le fondement même de toute véritable démocratie. Votre voix compte 1:1 comme tous les autres, ici la gouvernance s'opère par démocratie directe avec un modèle de décision strictement horizontal. Si l'époque le demande, renseignez vous, puis choisissez, ensuite vous allez mettre en oeuvre le processus de compilation de 80K lignes de C++ qu'est devenu Bitcoin et obtenir un binaire spécialement conçu pour s'exécuter sur votre machine.
 
-Pour choisir la version que vous souhaitez construire, faites `git -C ~/code/bitcoin tag` ou allez voir les [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), en octobre 2024 nous sommes loin de la "Guerre des blocs" de 2015 à 2017, la période est apparemment calme et sereine, donc se limiter à deux choix me semble raisonnable, cela donne :
+Pour choisir la version que vous souhaitez construire, faites `git -C ~/code/bitcoin tag` ou allez voir les [releases sur le repository bitcoin](https://github.com/bitcoin/bitcoin/releases), nous sommes loin de la "Guerre des blocs" de 2015 à 2017, la période est apparemment calme et sereine, donc se limiter à deux options me semble raisonnable, en octobre 2024 cela a donné :
 
 * 'v28.0' pour la dernière "final" qui intègre des améliorations et des correctifs.
 * 'v27.1' l'avant-dernière "final", contient des correctifs pour l'essentiel.
@@ -215,9 +215,13 @@ Options used to compile and link:
 
 Si vous avez paramétré une option mais qu'à l'arrivée elle est absente, regardez si vous n'avez pas une dépendance manquante. Des logs sont générés par `configure`, pour vérifier si une option activée au départ n'est pas ensuite dé-activée effectuer : `grep -i <option_particuliere> config.log` comme par exemple `grep -i bench config.log`
 
-gui signifie Graphical User Interface et qt est un framework de développement multi-plateforme pour la création d'applications et d'interfaces utilisateur graphiques avec C++
+`gui` signifie Graphical User Interface et `qt` est un framework de développement multi-plateforme pour la création d'applications et d'interfaces utilisateur graphiques avec C++
 
-A propos du terme USDT, cela n'a rien à voir avec les "stablecoins", c'est utilisé pour activer les traces utilisateur statiquement définies, ce sont des outils de traçage pour l'analyse des performances et le débogage. C'est très intéressant mais hors du "scope" ici. Poursuivre en remarquant que la compilation (la ligne make) dure 1 à 2 heures sur un Raspberry Pi 5 / NVMe.M2 en fonction des options (si tests, fuzz binary et bench sont actives cela rallonge le temps de compilation) et environ 20mn sur le Dell Optiplex 5050. Pendant ce temps vous pouvez ouvrir un nouveau terminal et installer Tor, I2P,  … ou continuer à flâner dans le code source ou la documentation de Bitcoin. N'oubliez pas de taper la deuxième ligne !
+`zmq` ZeroMQ est une interface de notification qui permet à des applications externes de recevoir des mises à jour en temps réel sur les événements du réseau Bitcoin. Zéro c'est pour 0 intermédiaire, 0 latence, 0 coût, 0 administration. Cool zéro admin :) MQ c'est pour "Message Queue" ou file de messages. Ce sera peut être utile par la suite, vérifiez que ce soit yes. 
+
+A propos du terme USDT, cela n'a rien à voir avec les "stablecoins", c'est utilisé pour activer les traces utilisateur statiquement définies, ce sont des outils de traçage pour l'analyse des performances et le débogage. C'est très intéressant mais hors du "scope" ici.
+
+Poursuivre en remarquant que la compilation (la ligne make) dure 1 à 2 heures sur un Raspberry Pi 5 / NVMe.M2 en fonction des options (si tests, fuzz binary et bench sont actives cela rallonge le temps de compilation) et environ 20mn sur le Dell Optiplex 5050. Pendant ce temps vous pouvez ouvrir un nouveau terminal et installer Tor, I2P,  … ou continuer à flâner dans le code source ou la documentation de Bitcoin. N'oubliez pas de taper la deuxième ligne !
 
 ```bash
 make
@@ -767,14 +771,14 @@ Ensuite gardez à l'esprit que votre nœud est constamment connecté à Internet
 
 Afin d'élargir le choix des portefeuilles utilisables, il est opportun d'installer un serveur Electrum sur le nœud Bitcoin. Il sera ensuite possible d'utiliser le portefeuille Electrum ou un autre pourvu qu'il soit compatible avec le format SPV d'Electrum. Quand la date de naissance du portefeuille est inconnue (date de la 1 ère transaction) et que toute la blockchain doit être parcourue depuis l'origine le format SPV permet d'obtenir le solde bitcoin bien plus rapidement que l'utilisation directe ou indirecte du wallet de Bitcoin Core et ce même avec "blockfilterindex" activé.
 
-Avant de se lancer dans d'autres installations, et que l'un n'empêche pas l'autre, ci-dessous la configuration `bitcoin.conf`  pour une connexion directe portefeuille à bitcoin core par rpc (Remote Procedure Call ou appel de procédure distante).
+Avant de se lancer dans d'autres installations, et que l'un n'empêche pas l'autre, ci-dessous la configuration `bitcoin.conf`  pour une connexion directe portefeuille à Bitcoin Core par RPC (Remote Procedure Call ou appel de procédure distante).
 
 
 ### Portefeuille connecté à Bitcoin Core
 
-Si vous préférez le standard de communication SPV Electrum, sautez donc ce paragraphe !
+Si vous préférez le standard SPV d'Electrum, sautez donc ce paragraphe !
 
-Vérifiez d'abord si le portefeuille que vous utilisez est capable de se connecter directement au nœud Bitcoin. [Point de départ pour évaluer les wallets](https://bitcoin.org/en/choose-your-wallet?step=5), sélectionnez ensuite votre matériel / OS.
+Vérifiez d'abord si le portefeuille que vous voulez utiliser est capable de se connecter directement au nœud Bitcoin. [Point de départ pour évaluer les wallets](https://bitcoin.org/en/choose-your-wallet?step=5), sélectionnez ensuite votre matériel / OS.
 
 Rajoutez ces lignes à la fin de `bitcoin.conf` par `nano ~/.bitcoin/bitcoin.conf`
 
@@ -870,7 +874,7 @@ git checkout "v0.10.6"
 cargo build --locked --release
 ```
 
-Patienter cela prends du temps ... poursuivre avec ceci :
+Patienter cela prend du temps ... poursuivre avec ceci :
 
 ```bash
 # Installation du binaire en mode manuel
@@ -1027,7 +1031,7 @@ Observer les logs dans le terminal, c'est synchronisé avec le dernier bloc, tou
 
 `sudo systemctl stop electrs.service`
 
-Notez qu'en effectuant de l'exploration didactique avec Electrum sur des portefeuilles en lecture seule avec des adresses de mineurs, mon serveur `electrs` ne répondait plus pendant un certain temps. Fermez le portefeuille qui a engendré le time-out, observez les logs d'`electrs`,  puis choisissez une des 2 options :
+Si plus tard vous effectuez de l'exploration didactique avec le wallet Electrum sur des portefeuilles en lecture seule avec des adresses de mineurs, il est possible que le serveur `electrs` ne réponde plus pendant un certain temps. Si cela se produit, fermez le portefeuille qui a engendré le time-out, observez les logs d'`electrs`,  puis choisissez une des 2 options :
 
 
 1. Lancez `sudo systemctl stop electrs.service` , ensuite il est nécessaire d'attendre patiemment 5mn pour retrouver la main, c'est le temps du `TimeoutSec=300` paramétré dans le fichier `electrs.service` , relancez ensuite le service.
@@ -1307,9 +1311,9 @@ A des fins didactiques avec Electrum il est possible d'importer une adresse Bitc
 
 * Bloc 210 000 / Bloc du 1ᵉʳ halving adresse du mineur / last tx 22.02.2013 / 5206 transactions
   * `1NEU779yvLaFk39k4Q3QdLjwpWTdWCbzqL`
-* Bloc 873 630 /  adresse du mineur / actif en 2024 / environ 1200 transactions :
+* Bloc 873 630 /  adresse du mineur / actif en 2025 / environ 1230 transactions :
   * `bc1qrpp7g75sx3ejclvsfdw2uahzchtyu7vumkuadu`
-* Bloc 873 652 / adresse du mineur / actif en 2024 / environ 1700 transactions
+* Bloc 873 652 / adresse du mineur / actif en 2025 / environ 2300 transactions
   * `3Awm3FNpmwrbvAFVThRUFqgpbVuqWisni9`
 
 Les autres portefeuilles capables de créer un wallet spectateur d'après une adresse publique sont Bitcoin Core et BlueWallet qui accepte la connection SPV à un serveur Electrum et également la connexion RPC à `bitcoind` (exécutables pour Android, IOS et macOS).
@@ -1385,7 +1389,7 @@ Cette séparation des rôles est fondamentale pour la sécurité : même si votr
 (⁵) BitBox02 est le seul dispositif que j'ai testé qui permet de voir plus d'une fois la seed phrase :
 
 * avantage, si la seed phrase est perdue il est possible de la ré-écrire sur un support physique ou de la sauvegarder à nouveau sur micro SD.
-* inconvénient, si une personne mal intentionnée à accès au dispositif et qu'elle connait le code PIN, en dehors du vol direct comme sur tous les autres dispositif il faut considérer l'effet pervers du temps que cela peut engendrer. En effet cette personne sera en mesure de créer son backup personnel et de déplacer les fonds plus tard …
+* inconvénient, si une personne mal intentionnée à accès au dispositif et qu'elle connait le code PIN, en dehors du vol direct comme sur tous les autres dispositifs il faut considérer l'effet pervers du temps que cela peut engendrer. En effet cette personne sera en mesure de créer son backup personnel et de déplacer les fonds plus tard …
 
 (⁶) Autres phrases de récupération sur Trezor wallet :
 
@@ -1437,7 +1441,7 @@ Plus d'information sur les fichiers et répertoires du nœud Bitcoin : [toute la
 
 ### Nœud public / privé
 
-Un nœud est pleinement opérationnel seulement s'il est à jour, si l'on souhaite effectuer des tests tout azimut, un nœud privé peut s'avérer utile. En effet cela permet d'isoler le nœud de test des autres, il ne divulguera pas d'informations à ses pairs, vous pourrez le redémarrer à volonté et effectuer des choses sensibles en toute discrétion. C'est très bien pour apprendre.
+Un nœud est opérationnel seulement s'il est à jour, si l'on souhaite effectuer des tests tout azimut, un nœud privé peut s'avérer utile. En effet cela permet d'isoler le nœud de test des autres, il ne divulguera pas d'informations à ses pairs, vous pourrez le redémarrer à volonté et effectuer des choses sensibles en toute discrétion. C'est très bien pour apprendre.
 
 * le public est connecté avec ses pairs à travers une couche d'anonymisation (Tor / I2P ) , il fonctionne 7j / 7 en continu. ipv4 n'est utilisé que sur le réseau local pour mettre à jour le nœud privé.
 * le privé fonctionne sur une machine distincte reliée au nœud public par réseau local, c'est le seul pair avec qui il dialogue. En résumé, il ne fait que mettre à jour sa copie de la blockchain afin de rester opérationnel.
@@ -1522,7 +1526,7 @@ Ensuite dans "Window / Console", saisir :
   * l'adresse a été utilisée pour la première fois le 30-06-2023 au bloc `796537`
   * nous sommes le 27 janvier 2025 à 22h00, le dernier bloc est le `881098`
   * lancer la recherche par : `rescanblockchain 796537 881098`
-* observer les log du nœud, 84 561 blocs seront parcourus entre 1 mn à 2mn et jusqu'à une heure en fonction du débit du support de masse qui héberge la blockchain et de la présence de l'index `blockfilter`
+* observer les log du nœud, 84 561 blocs seront parcourus entre 1mn à 2mn et jusqu'à une heure en fonction du débit du support de masse qui héberge la blockchain et de la présence de l'index `blockfilter`
 * par l'ajout de `walletnotify` dans `bitcoin.conf` toute nouvelle transaction exécutera un script ou une commande : `walletnotify=xmessage "Funds had been moved: %s" -center`, %s sera remplacé par l'id de la transaction.
 
 pour supprimer le portefeuille "miner_wallet"
@@ -1774,11 +1778,11 @@ Les portefeuilles matériels ou logiciels modernes permettent de générer des c
   * `49` en référence aux adresses nested-Segwit `3`  `P2SH-P2WPKH`  [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki)
   * `84` en référence aux adresses native SegWit `bc1q`  `P2WPKH`   [BIP84](https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki)
   * `86` en référence aux adresses Taproot `bc1p`  `P2TR`  [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki)
-  * l'utilisation de l'apostrophe `'` ou du h après le paramètre signifie "hardened derivation" ou dérivation renforcée, comme `44h` ou `44'`. Un algorithme supplémentaire est mis en oeuvre, il devient presque impossible d'accéder à la clé maître même si une clé privée dérivée est compromise. Cela constitue une une couche supplémentaire de sécurité.
+  * l'utilisation de l'apostrophe `'` ou du `h` après le paramètre signifie "hardened derivation" ou dérivation renforcée, comme `44h` ou `44'`. Un algorithme supplémentaire est mis en oeuvre, il devient presque impossible d'accéder à la clé maître même si une clé privée dérivée est compromise. Cela constitue une une couche supplémentaire de sécurité.
 * **coin type** → renseigne sur l'actif
-  * `0` est bitcoin (`'`  ou h sont utilisables)
+  * `0` est bitcoin (`'`  ou `h` sont utilisables)
   * pour reste c'est [ici](https://github.com/satoshilabs/slips/blob/master/slip-0044.md).
-* **account** → indique l'identité ou la collection d'adresses, la première est notée `0`. Dans un portefeuille multi-comptes cela permet aux utilisateurs de séparer les fonds pour différentes choses comme hold, dépense, dons, etc… (`'`  ou h sont utilisables)
+* **account** → indique l'identité ou la collection d'adresses, la première est notée `0`. Dans un portefeuille multi-comptes cela permet aux utilisateurs de séparer les fonds pour différentes choses comme hold, dépense, dons, etc… (`'`  ou `h` sont utilisables)
 * **change** → renseigne sur la transaction
   * `0` indique les adresses de `chaîne externe`, régulières.
   * `1` indique les adresses de `chaîne interne`, c'est le change, le rendu monnaie.
@@ -1787,11 +1791,11 @@ Les portefeuilles matériels ou logiciels modernes permettent de générer des c
 
 Par exemple `m/44h/0h/0h/1/1` indique :
 
-* `44'` adresse Legacy renforcée
-* `0'` le type d'actif est renforcé, ici bitcoin.
-* `0'` le compte est renforcé, ici le premier, le suivant sera noté `1'`.
+* `44h` adresse Legacy renforcée
+* `0h` le type d'actif est renforcé, ici bitcoin.
+* `0h` le compte est renforcé, ici le premier, le suivant sera noté `1'`.
 * `1` une adresse de rendu monnaie
-* `1` une adresse de rang 2, la première adresse est notée `0` .
+* `1` une adresse de rang 2, le rang 1 (la première adresse) étant notée `0` .
 
 ### CPU
 
@@ -1847,7 +1851,7 @@ Simplified Payment Verification ou vérification simplifiée des paiements. Cett
 
 Unspent Transaction Output ou sortie de transaction non dépensé. Une transaction consomme un ou plusieurs UTXO existants comme entrée et crée de nouveaux UTXO comme sortie, le total des fonds entrants est toujours égal au total des fonds sortants y compris les frais de transaction.  Ce concept fondamental, *qui de fait est un déplacement des droits de propriété*, a été implémenté à la création de Bitcoin. Exemple : vous possédez 1 BTC sur un seul UTXO et vous devez payer 0.5 BTC à un tiers. Votre transaction utilisera votre UTXO de 1 BTC comme entrée et créera trois nouvelles sorties : 0.5 BTC vers le tiers, 0.00001 BTC de frais de transaction, 0.49999 BTC de retour vers vous sur une de vos adresses de change. Vous avez maintenant un nouvel UTXO de 0.49999 BTC. Les entrées consomment un UTXO existant tandis que les sorties créent un nouvel UTXO, en résumé seuls les produits non dépensés peuvent être utilisés dans de nouvelles transactions, cela évite la double dépense et la fraude. En règle générale les portefeuilles gèrent les UTXO de manière transparente pour les utilisateurs selon différentes stratégies en fonction des choix implémentés par les développeurs du portefeuille logiciel.
 
-Un "full node" possède l'historique de la totalité des UTXO dans son stockage local. A un moment donné l'ensemble des UTXO peut être additionné pour calculer l'offre totale en circulation,  la commande `bitcoin_cli gettxoutsetinfo` donne  19 817 079 BTC au 30-01-2025.
+Un "full node" possède l'historique de la totalité des UTXO dans son stockage local. A un moment donné l'ensemble des UTXO peut être additionné pour calculer l'offre totale en circulation,  la commande `bitcoin-cli gettxoutsetinfo` donne  19 817 079 BTC au 30-01-2025.
 
 ## Liens
 
