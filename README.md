@@ -1,4 +1,4 @@
-# Construisez votre nœud bitcoin "from scratch *" puis devenez un gardien souverain.
+# Construisez votre nœud Bitcoin "from scratch *" puis devenez un gardien souverain
 
 **\* construire soit-même : compiler le code source de toutes les applications critiques et paramétrer le tout pour une sécurité et une confidentialité satisfaisantes.**
 
@@ -1441,7 +1441,7 @@ Plus d'information sur les fichiers et répertoires du nœud Bitcoin : [toute la
 
 ### Nœud public / privé
 
-Un nœud est opérationnel seulement s'il est à jour, si l'on souhaite effectuer des tests tout azimut, un nœud privé peut s'avérer utile. En effet cela permet d'isoler le nœud de test des autres, il ne divulguera pas d'informations à ses pairs, vous pourrez le redémarrer à volonté et effectuer des choses sensibles en toute discrétion. C'est très bien pour apprendre.
+Un nœud est opérationnel seulement s'il est à jour, si l'on souhaite effectuer des tests tous azimuts, un nœud privé peut s'avérer utile. En effet cela permet d'isoler le nœud de test des autres, il ne divulguera pas d'informations à ses pairs, vous pourrez le redémarrer à volonté et effectuer des choses sensibles en toute discrétion. C'est très bien pour apprendre.
 
 * le public est connecté avec ses pairs à travers une couche d'anonymisation (Tor / I2P ) , il fonctionne 7j / 7 en continu. ipv4 n'est utilisé que sur le réseau local pour mettre à jour le nœud privé.
 * le privé fonctionne sur une machine distincte reliée au nœud public par réseau local, c'est le seul pair avec qui il dialogue. En résumé, il ne fait que mettre à jour sa copie de la blockchain afin de rester opérationnel.
@@ -1891,17 +1891,16 @@ We have proposed a system for electronic transactions without relying on trust. 
 
 ### du papier de Satoshi Nakamoto
 
-Nous avons proposé un système de transactions électroniques qui ne repose pas sur la confiance. Nous avons commencé par le cadre habituel des pièces de monnaie fabriquées à partir de signatures numériques, qui permet un contrôle solide de la propriété, mais qui est incomplet s'il n'y a pas de moyen d'empêcher la double dépense. Pour résoudre cela, nous avons proposé un réseau pair à pair utilisant la preuve de travail pour enregistrer un historique public des transactions qui devient rapidement impossible à modifier pour un attaquant si les nœuds honnêtes contrôlent la majorité de la puissance CPU (¹). Le réseau est robuste dans sa simplicité non structurée. Les nœuds travaillent tous en même temps avec peu de coordination. Ils n'ont pas besoin d'être identifiés, puisque les messages ne sont pas acheminés vers un endroit particulier et qu'ils ne doivent être délivrés que dans la mesure du possible. Les nœuds peuvent quitter et rejoindre le réseau à volonté, en acceptant la chaîne de preuve de travail comme preuve de ce qui s'est passé pendant leur absence. Ils votent avec la puissance de leur CPU (¹), exprimant leur acceptation des blocs valides en travaillant à leur extension et leur rejet des blocs non valides en refusant de travailler dessus. Ce mécanisme de consensus permet d'appliquer toutes les règles et incitations nécessaires.
+Nous avons proposé un système de transactions électroniques qui ne repose pas sur la confiance. Nous avons commencé par le cadre habituel des pièces de monnaie fabriquées à partir de signatures numériques, qui permet un contrôle solide de la propriété, mais qui est incomplet s'il n'y a pas de moyen d'empêcher la double dépense. Pour résoudre cela, nous avons proposé un réseau pair à pair utilisant la preuve de travail pour enregistrer un historique public des transactions qui devient rapidement impossible à modifier pour un attaquant si les nœuds honnêtes contrôlent la majorité de la puissance CPU (¹). Le réseau est robuste dans sa simplicité non structurée. Les nœuds travaillent tous en même temps avec peu de coordination. Ils n'ont pas besoin d'être identifiés, puisque les messages ne sont pas acheminés vers un endroit particulier et qu'ils ne doivent être délivrés que dans la mesure du possible. Les nœuds peuvent quitter et rejoindre le réseau à volonté, en acceptant la chaîne de preuve de travail comme preuve de ce qui s'est passé pendant leur absence. Ils votent avec la puissance de leur CPU (¹), exprimant leur acceptation des blocs valides en travaillant à leur extension et au rejet des blocs non valides en refusant de travailler dessus. Toutes les règles et récompenses nécessaires peuvent être imposées avec ce mécanisme de consensus.
 
 
-(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un où le nœud utilise la puissance de traitement de son CPU (²) pour la création des nouveaux blocs avec la preuve de travail. Depuis 2013 \~ 2014 cette preuve de travail (Proof of Work), *qui est la base du consensus*,  est devenu une activité industrielle nécessitant des investissements colossaux et donc hors de portée de l'individu. Le hashrate, qui quantifie cette puissance de traitement SHA256 disponible sur le réseau Bitcoin, s'est externalisé et professionnalisé.  Autrement dit, pour avoir une chance raisonnable de créer de nouveaux blocs, un nœud Bitcoin doit déléguer (³) et utiliser la puissance de calcul de milliers de puces spécialisées appelées ASIC qui sont groupées dans ce que l'on nomme des pools de minage.
-
-Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds qui minent les nouveaux blocs.
+(¹) Nous sommes fin 2008, il est fait référence à un équipement tout en un où le nœud utilise la puissance de traitement de son CPU (²) pour la création des nouveaux blocs avec la preuve de travail. Depuis 2013 \~ 2014 cette preuve de travail (Proof of Work ou POW), *qui est la base du consensus*,  est devenu une activité industrielle nécessitant des investissements colossaux et donc hors de portée de l'individu. Le hashrate, qui quantifie la puissance de traitement SHA256 disponible sur le réseau Bitcoin, s'est externalisé et professionnalisé.  Autrement dit, pour avoir une chance raisonnable de propager de nouveaux blocs avec un nœud Bitcoin, il est nécessaire de déléguer (³) la puissance de calcul à des milliers de puces spécialisées appelées ASIC qui sont groupées dans ce que l'on nomme des pools de minage.
 
 (²)  Le minage CPU via `bitcoind` n'est plus supporté depuis `bitcoin core 0.13.0` sorti en 2016.
 
-(³) cette délégation s'effectue par Stratum, un protocole de communication qui sert d'intermédiaire entre les ASIC spécialisés SHA256 et le nœud Bitcoin. Stratum permet d'agréger la puissance de calcul du minage en pool avec optimisation de la charge et de la latence réseau. En simplifiant : Stratum coordonne les pools de mineurs et procure au nœud Bitcoin la faculté de créer de nouveau blocs.
+(³) Pour des raisons de scalabilité cette délégation s'effectue majoritairement par Stratum, un protocole de communication qui sert d'intermédiaire entre les pools d'ASIC spécialisés SHA256 et le nœud Bitcoin mais pas que, puisque c'est dans ce logiciel serveur de pool que la création des blocs est réalisée. Stratum permet d'agréger la puissance de calcul du minage en pool avec optimisation de la charge et de la latence réseau. En simplifiant : Stratum crée les nouveaux blocs en coordonnant les pools de mineurs; si un bloc conforme est construit il est transmis au nœud qui va le diffuser ensuite à tous ses pairs.
 
+Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la puissance de calcul du matériel augmenterait dans le temps et dès le départ il a conçu Bitcoin avec une difficulté ajustable pour s'adapter à cette augmentation de puissance de calcul et à l'intérêt variable des nœuds qui minent les nouveaux blocs.
 
 ### Q'engendre la professionnalisation de la puissance de calcul dans la gouvernance de Bitcoin ?
 
@@ -1913,7 +1912,7 @@ Au chapitre 4 de son papier, Satoshi Nakamoto avait prévu et anticipé que la p
 * Assurent la collecte, la validité et la diffusion des nouvelles transactions 
 * Appliquent les règles du consensus
 
-**Les mineurs** (les industriels → nœuds + fermes d'ASIC créant des nouveaux blocs)
+**Les mineurs** (les industriels → nœuds + pools de minage créant des nouveaux blocs)
 
 * Sont également des nœuds avec tout ce qui les caractérise
 * Sélectionnent les transactions en attente et les ajoutent au bloc
@@ -1928,9 +1927,14 @@ En admettant que ce que j'ai écrit est suffisamment vrai et exhaustif, l'on pou
 * de la puissance de calcul entre les différents acteurs industriels du minage
 * géographique des nœuds et des mineurs
 
-Réponse : *j'essaie de la trouver … mais en fait j'en sait rien !* Et puis quand je regarde la courbe à tendance parabolique du [hashrate](https://www.coinwarz.com/mining/bitcoin/hashrate-chart) dans le temps, les "incentives" dont parle Satoshi Nakamoto fonctionnent à plein régime. Au fait la commande c'est `bitcoin-cli getnetworkhashps`
+Réponse : *j'essaie de la trouver … mais en fait j'en sais rien !* Et puis quand je regarde la courbe à tendance parabolique du [hashrate](https://www.coinwarz.com/mining/bitcoin/hashrate-chart) dans le temps, les "incentives" fonctionnent à plein régime, à se demander si ce n'est pas trop en regard de l'industrialisation effrénée qui tend à concentrer la puissance de calcul entre trop peu de mains. Cette concentration amène aussi une certaine opacité dans le code informatique de ce qui gravite autour du nœud Bitcoin (serveurs de pool et ASIC).
 
+Au fait la commande c'est `bitcoin-cli getnetworkhashps`
+
+* aujourd'hui cela me réponds 7.465207827981607e+20 (746 EH/s)
+* le 24 août 2009 c'était 7.208467e+5 (720 KH/s soit le hash de 10 NerdMiner)
+* la diff à la louche → e+15 soit 1 000 000 000 000 000 de fois plus
 
 ### Ma conclusion
 
-Faites donc tourner un nœud, le vôtre, et existez en tant qu'individu !
+Faites donc tourner un nœud, le vôtre, soyez indépendant et existez en tant qu'individu !
